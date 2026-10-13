@@ -948,10 +948,8 @@ def contact_page():
 
     with right:
         st.markdown("### Direct contact")
-        st.markdown("For a direct conversation, use email, LinkedIn, or schedule a short introduction call.")
-        st.link_button("Email me", f"mailto:{profile.get('email', '')}")
-        st.link_button("Connect on LinkedIn", profile.get("linkedin", "#"))
-        st.link_button("Schedule an introduction", profile.get("calendar", "#"))
+        st.markdown("For a direct conversation, email me at sylvester.career@gmail.com.")
+        st.link_button("Email sylvester.career@gmail.com", "mailto:sylvester.career@gmail.com")
 
         st.markdown("### Response expectations")
         st.markdown("I aim to respond within 1-2 business days. For time sensitive opportunities, mention the timeline in your message.")
