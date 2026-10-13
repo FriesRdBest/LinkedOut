@@ -32,6 +32,86 @@ BORDER = "#1D2833"
 st.markdown(
     f"""
     <style>
+
+      /* Visual Elevation Reset — Phase 1
+         Only: active sidebar block + remove Streamlit top chrome. */
+
+      header[data-testid="stHeader"] {{
+        display: none;
+      }}
+
+      [data-testid="stToolbar"] {{
+        display: none;
+      }}
+
+      .stApp > header {{
+        display: none;
+      }}
+
+      .block-container {{
+        padding-top: 2.5rem;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] {{
+        gap: 0.25rem;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label {{
+        position: relative;
+        display: flex;
+        width: 100%;
+        min-height: 2.75rem;
+        margin: 0;
+        padding: 0.72rem 0.85rem;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: #93A4B5;
+        font-size: 0.9rem;
+        font-weight: 620;
+        line-height: 1.2;
+        transition: background 160ms ease, color 160ms ease;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label div:first-child {{
+        display: none;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label p {{
+        margin: 0;
+        color: inherit;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {{
+        background: rgba(55, 224, 200, 0.10);
+        color: #E8EEF4;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {{
+        background: #37E0C8;
+        color: #070B10;
+        font-weight: 780;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] p {{
+        color: #070B10;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"]:hover {{
+        background: #37E0C8;
+        color: #070B10;
+      }}
+
+      @media (max-width: 767px) {{
+        .block-container {{
+          padding-top: 1.5rem;
+        }}
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] label {{
+          min-height: 2.6rem;
+          padding: 0.68rem 0.75rem;
+        }}
+      }}
       .stApp {{
         background:
           radial-gradient(1100px 620px at 12% -8%, rgba(55, 224, 200, 0.10), transparent 60%),
