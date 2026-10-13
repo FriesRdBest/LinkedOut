@@ -14,7 +14,7 @@ LinkedOut is a working alternative to a conventional professional profile. Inste
 - Streamlit user interface
 - YAML data layer for profile, projects, applications, capabilities, and decisions
 - Modular data loader utilities
-- Dark, responsive design system
+- Coastal, responsive design system with animated shoreline details
 
 ## Live application
 
