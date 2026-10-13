@@ -1108,7 +1108,7 @@ def signal_page():
         f"""
         <div class="hero">
           <div class="eyebrow">Proof of work career application</div>
-          <h1>LinkedOut</h1>
+          <h1>Linked<span class="hero-brand-out">Out</span></h1>
           <p>
             A working alternative to a conventional professional profile.
             LinkedOut presents evidence, working software, decision records, and a transparent
@@ -1120,23 +1120,45 @@ def signal_page():
     )
 
     st.write("")
-    col1, col2, col3, col4 = st.columns(4)
     live_demos = sum(1 for p in projects if p.get("demo_url"))
     artifact_count = sum(1 for a in applications if a.get("artifact"))
 
-    with col1:
-        st.markdown(f"""<div class='metric-card'><div class='metric-value'>{metrics.get('public_repositories', len(projects))}</div><div class='metric-label'>Public repositories</div></div>""", unsafe_allow_html=True)
-    with col2:
-        flagship_count = sum(1 for p in projects if p.get("status") == "Flagship")
-        st.markdown(f"""<div class='metric-card'><div class='metric-value'>{flagship_count}</div><div class='metric-label'>Flagship case studies</div></div>""", unsafe_allow_html=True)
-    with col3:
-        st.markdown(f"""<div class='metric-card'><div class='metric-value'>{live_demos}</div><div class='metric-label'>Live demos</div></div>""", unsafe_allow_html=True)
-    with col4:
-        st.markdown(f"""<div class='metric-card'><div class='metric-value'>{artifact_count}</div><div class='metric-label'>Application artifacts</div></div>""", unsafe_allow_html=True)
+    flagship_count = sum(
+        1 for project in projects if project.get("status") == "Flagship"
+    )
+
+    st.markdown(
+        f"""
+        <div class="signal-metrics-grid">
+            <div class="signal-metric-card">
+                <div class="signal-metric-value">
+                    {metrics.get('public_repositories', len(projects))}
+                </div>
+                <div class="signal-metric-label">Public repositories</div>
+            </div>
+            <div class="signal-metric-card">
+                <div class="signal-metric-value">{flagship_count}</div>
+                <div class="signal-metric-label">Flagship case studies</div>
+            </div>
+            <div class="signal-metric-card">
+                <div class="signal-metric-value">{live_demos}</div>
+                <div class="signal-metric-label">Live demos</div>
+            </div>
+            <div class="signal-metric-card">
+                <div class="signal-metric-value">{artifact_count}</div>
+                <div class="signal-metric-label">Application artifacts</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.write("")
     st.markdown("### Primary actions")
-    b1, b2, b3 = st.columns(3)
+    st.markdown('<div class="primary-actions-row">', unsafe_allow_html=True)
+
+    b1, b2, b3 = st.columns(3, gap="large")
+
     with b1:
         if st.button("View Proof of Work", use_container_width=True):
             st.session_state["nav_override"] = "Proof of Work"
@@ -1150,6 +1172,8 @@ def signal_page():
             st.session_state["nav_override"] = "Contact"
             st.rerun()
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
     st.write("")
     st.markdown("### Current focus")
     st.markdown(profile.get("current_focus", ""))
@@ -1159,14 +1183,66 @@ def signal_page():
 
     st.markdown("### Primary skills")
     skills = profile.get("primary_skills", [])
-    for index in range(0, len(skills), 3):
-        columns = st.columns(3)
-        for column, skill in zip(columns, skills[index : index + 3]):
+
+    preferred_skill_order = [
+        "Python",
+        "Streamlit",
+        "SQL",
+        "Power BI",
+        "Workflow automation",
+        "AI product prototyping",
+        "Design Governance",
+        "Data quality",
+        "Product operations",
+        "Accessibility",
+    ]
+
+    skill_lookup = {
+        skill.casefold(): skill
+        for skill in skills
+    }
+
+    ordered_skills = [
+        skill_lookup[name.casefold()]
+        for name in preferred_skill_order
+        if name.casefold() in skill_lookup
+    ]
+
+    ordered_skills.extend(
+        skill
+        for skill in skills
+        if skill.casefold() not in {
+            item.casefold()
+            for item in ordered_skills
+        }
+    )
+
+    skill_layout = [
+        [0, 1, 2],
+        [3, None, 4],
+        [5, None, 6],
+        [7, 8, 9],
+    ]
+
+    for row in skill_layout:
+        columns = st.columns(3, gap="large")
+
+        for column, skill_index in zip(columns, row):
+            if skill_index is None or skill_index >= len(ordered_skills):
+                continue
+
             with column:
+                skill = ordered_skills[skill_index]
                 st.markdown(
-                    f'<div class="section-card"><h3>{skill}</h3></div>',
+                    f'<div class="primary-skill-card"><h3>{skill}</h3></div>',
                     unsafe_allow_html=True,
                 )
+
+    for skill in ordered_skills[10:]:
+        st.markdown(
+            f'<div class="primary-skill-card"><h3>{skill}</h3></div>',
+            unsafe_allow_html=True,
+        )
 
     st.write("")
     st.markdown("### Currently exploring")
@@ -1642,31 +1718,71 @@ def capability_page():
         render_empty_state("No capabilities match these filters yet.")
         return
 
-    for capability in visible_capabilities:
-        with st.expander(capability.get("name", "Capability")):
-            render_status_pill(capability.get("evidence_strength", "Demonstrated"))
-            st.write("")
-            st.markdown("**Evidence**")
+    filters_active = (
+        evidence_filter != "All evidence" or bool(role_filter)
+    )
 
-            evidence_names = capability.get("evidence", [])
-            for evidence_name in evidence_names:
-                related_project = next(
-                    (project for project in projects if project.get("title") == evidence_name),
-                    None,
-                )
-                if related_project:
-                    if st.button(
-                        f"View {evidence_name} case study",
-                        key=f"capability_{capability.get('name', '').lower().replace(' ', '_')}_{evidence_name.lower().replace(' ', '_')}",
-                    ):
-                        st.session_state["selected_project"] = evidence_name
-                        st.session_state["return_to_capability"] = True
-                        st.rerun()
-                else:
-                    st.markdown(evidence_name)
+    if not filters_active and len(visible_capabilities) == 10:
+        capability_rows = [
+            visible_capabilities[0:3],
+            visible_capabilities[3:5],
+            visible_capabilities[5:7],
+            visible_capabilities[7:10],
+        ]
+    else:
+        capability_rows = [
+            visible_capabilities[index:index + 3]
+            for index in range(0, len(visible_capabilities), 3)
+        ]
 
-            st.markdown("**Relevant roles**")
-            render_project_tags(capability.get("relevant_roles", []))
+    for row_index, capability_row in enumerate(capability_rows):
+        columns = st.columns(len(capability_row), gap="large")
+
+        for column, capability in zip(columns, capability_row):
+            with column:
+                with st.expander(capability.get("name", "Capability")):
+                    render_status_pill(
+                        capability.get("evidence_strength", "Demonstrated")
+                    )
+                    st.write("")
+                    st.markdown("**Evidence**")
+
+                    evidence_names = capability.get("evidence", [])
+
+                    for evidence_name in evidence_names:
+                        related_project = next(
+                            (
+                                project
+                                for project in projects
+                                if project.get("title") == evidence_name
+                            ),
+                            None,
+                        )
+
+                        if related_project:
+                            capability_key = capability.get(
+                                "name", ""
+                            ).lower().replace(" ", "_")
+                            evidence_key = evidence_name.lower().replace(
+                                " ", "_"
+                            )
+
+                            if st.button(
+                                f"View {evidence_name} case study",
+                                key=f"capability_{capability_key}_{evidence_key}",
+                            ):
+                                st.session_state["selected_project"] = (
+                                    evidence_name
+                                )
+                                st.session_state["return_to_capability"] = True
+                                st.rerun()
+                        else:
+                            st.markdown(evidence_name)
+
+                    st.markdown("**Relevant roles**")
+                    render_project_tags(
+                        capability.get("relevant_roles", [])
+                    )
 
 
 def decisions_page():
@@ -2870,6 +2986,290 @@ div[data-baseweb="select"] > div {
 """
 
 st.markdown(coastal_responsive_css, unsafe_allow_html=True)
+
+
+# LinkedOut Coastal Motion & Spacing v6
+
+coastal_motion_spacing_css = """
+<style>
+/* Give card layouts more air without changing their visual language. */
+[data-testid="stHorizontalBlock"] {
+    gap: clamp(1.1rem, 2vw, 1.7rem) !important;
+}
+
+.metric-card,
+.section-card,
+.project-card,
+.workflow-box {
+    margin-bottom: clamp(1.1rem, 2vw, 1.7rem) !important;
+}
+
+.metric-card,
+.section-card,
+.project-card {
+    transition:
+        transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
+        box-shadow 220ms ease,
+        border-color 220ms ease !important;
+}
+
+/* Animate the shoreline foam as a slow, repeating tide. */
+[data-testid="stAppViewContainer"]::before {
+    animation: coastal-tide 18s ease-in-out infinite !important;
+    will-change: transform, opacity;
+}
+
+@keyframes coastal-tide {
+    0% {
+        transform: translate3d(-18px, 0, 0) scaleX(1);
+        opacity: 0.72;
+    }
+
+    25% {
+        transform: translate3d(6px, -3px, 0) scaleX(1.03);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translate3d(20px, -1px, 0) scaleX(1);
+        opacity: 1;
+    }
+
+    75% {
+        transform: translate3d(-4px, 2px, 0) scaleX(0.98);
+        opacity: 0.82;
+    }
+
+    100% {
+        transform: translate3d(-18px, 0, 0) scaleX(1);
+        opacity: 0.72;
+    }
+}
+
+/* Add a second, softer foam layer for depth. */
+[data-testid="stAppViewContainer"]::after {
+    animation: coastal-tide-secondary 26s ease-in-out infinite !important;
+    will-change: transform;
+}
+
+@keyframes coastal-tide-secondary {
+    0% {
+        transform: translate3d(14px, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-16px, -2px, 0);
+    }
+
+    100% {
+        transform: translate3d(14px, 0, 0);
+    }
+}
+
+/* Keep the motion subtle and accessible. */
+@media (prefers-reduced-motion: reduce) {
+    [data-testid="stAppViewContainer"]::before,
+    [data-testid="stAppViewContainer"]::after {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+</style>
+"""
+
+st.markdown(coastal_motion_spacing_css, unsafe_allow_html=True)
+
+
+# LinkedOut Primary Skills Layout v7
+
+primary_skills_css = """
+<style>
+/* Compact, equal-width cards reserved for the Signal page skill inventory. */
+.primary-skill-card {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 1.05rem 1.2rem !important;
+    border-radius: 15px !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.96),
+            rgba(241,251,255,0.91)
+        ) !important;
+    border: 1px solid rgba(255,255,255,0.93) !important;
+    box-shadow:
+        0 8px 20px rgba(1,35,45,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.92) !important;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease !important;
+}
+
+.primary-skill-card::before {
+    content: "";
+    display: block;
+    height: 3px;
+    margin: -1.05rem 0 0.9rem !important;
+    border-radius: 0 0 999px 999px;
+    background: linear-gradient(90deg, #0a88c5, #54c9ea, #0a88c5);
+    opacity: 0.78;
+}
+
+.primary-skill-card h3 {
+    margin: 0 !important;
+    color: #01232d !important;
+    font-size: clamp(1rem, 1.15vw, 1.12rem) !important;
+    font-weight: 760 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.025em !important;
+}
+
+.primary-skill-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: rgba(70,178,215,0.65) !important;
+    box-shadow:
+        0 14px 28px rgba(1,35,45,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.96) !important;
+}
+
+@media (max-width: 767px) {
+    .primary-skill-card {
+        padding: 0.95rem 1rem !important;
+    }
+
+    .primary-skill-card::before {
+        margin-top: -0.95rem !important;
+        margin-bottom: 0.78rem !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .primary-skill-card,
+    .primary-skill-card:hover {
+        transform: none !important;
+        transition: none !important;
+    }
+}
+</style>
+"""
+
+st.markdown(primary_skills_css, unsafe_allow_html=True)
+
+
+# LinkedOut Final Sharing Polish v8
+
+final_sharing_css = """
+<style>
+/* Add breathing room without changing the established skill alignment. */
+.primary-skill-card {
+    padding: 1.2rem 1.3rem !important;
+    margin: 0 0 1rem !important;
+}
+
+.primary-skill-card::before {
+    margin: -1.2rem 0 1rem !important;
+}
+
+/* A dedicated grid avoids changing Streamlit columns on other pages. */
+.signal-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 1.8vw, 1.5rem);
+    margin: 0.5rem 0 1.25rem;
+}
+
+.signal-metric-card {
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 1.4rem 1.2rem;
+    border-radius: 18px;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.96),
+        rgba(241,251,255,0.91)
+    );
+    border: 1px solid rgba(255,255,255,0.93);
+    box-shadow:
+        0 10px 26px rgba(1,35,45,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.92);
+    color: #01232d;
+}
+
+.signal-metric-value {
+    color: #01232d;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 820;
+    line-height: 1.15;
+    letter-spacing: -0.05em;
+}
+
+.signal-metric-label {
+    margin-top: 0.55rem;
+    color: #3d6675;
+    font-size: 0.85rem;
+    font-weight: 650;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    .signal-metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .signal-metric-card {
+        padding: 1.15rem 1rem;
+    }
+
+    .primary-skill-card {
+        padding: 1.1rem 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .primary-skill-card::before {
+        margin: -1.1rem 0 0.9rem !important;
+    }
+}
+</style>
+"""
+
+st.markdown(final_sharing_css, unsafe_allow_html=True)
+
+
+# LinkedOut Final Brand and Actions v9
+
+final_brand_actions_css = """
+<style>
+/* Match the sidebar logo accent in the Signal hero title. */
+.hero-brand-out {
+    color: #006a94 !important;
+}
+
+/* Make the three Signal actions a true equal-width row. */
+.primary-actions-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 1.5vw, 1.25rem);
+    width: 100%;
+}
+
+.primary-actions-row .stButton,
+.primary-actions-row .stButton > button {
+    width: 100% !important;
+}
+
+@media (max-width: 767px) {
+    .primary-actions-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
+</style>
+"""
+
+st.markdown(final_brand_actions_css, unsafe_allow_html=True)
 
 PAGES[selected_page]()
 st.markdown("</div>", unsafe_allow_html=True)
