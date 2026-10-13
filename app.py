@@ -133,6 +133,46 @@ st.markdown(
         margin: 0;
       }}
 
+      .project-card {{
+        background: {CARD};
+        border: 1px solid {BORDER};
+        border-radius: 20px;
+        padding: 1.5rem 1.55rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }}
+
+      .project-card h3 {{
+        font-size: 1.18rem;
+        font-weight: 780;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }}
+
+      .project-card p {{
+        color: #A9B7C4;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+      }}
+
+      .project-tags {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }}
+
+      .project-tag {{
+        border: 1px solid {BORDER};
+        background: rgba(255, 255, 255, 0.03);
+        color: #C7D3DE;
+        border-radius: 999px;
+        padding: 0.22rem 0.6rem;
+        font-size: 0.72rem;
+      }}
+
       .status-pill {{
         display: inline-flex;
         align-items: center;
@@ -196,6 +236,11 @@ def render_empty_state(message):
 
 def render_status_pill(text):
     st.markdown(f'<div class="status-pill">{text}</div>', unsafe_allow_html=True)
+
+
+def render_project_tags(values):
+    tags = "".join(f'<span class="project-tag">{value}</span>' for value in values)
+    st.markdown(f'<div class="project-tags">{tags}</div>', unsafe_allow_html=True)
 
 
 def signal_page():
@@ -308,6 +353,82 @@ def operating_model_page():
                 )
 
 
+def ordered_projects():
+    return sorted(
+        projects,
+        key=lambda project: 0 if project.get("status") == "Flagship" else 1,
+    )
+
+
+def render_project_card(project):
+    summary = project.get("problem", "")
+    if len(summary) > 180:
+        summary = summary[:177].rstrip() + "..."
+
+    st.markdown(
+        f"""
+        <div class="project-card">
+          <div>
+            <div class="eyebrow">{project.get('status', 'Project')}</div>
+            <h3>{project.get('title', 'Project')}</h3>
+          </div>
+          <p>{summary}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    render_project_tags(project.get("stack", [])[:3])
+    if st.button(
+        "View case study",
+        key=f"view_{project.get('title', '').lower().replace(' ', '_')}",
+        use_container_width=True,
+    ):
+        st.session_state["selected_project"] = project.get("title")
+        st.rerun()
+
+
+def render_project_detail(project):
+    if st.button("Back to all projects", key="back_to_projects"):
+        st.session_state["selected_project"] = None
+        st.rerun()
+
+    st.write("")
+    render_status_pill(project.get("status", "Project"))
+    st.markdown(f"# {project.get('title', 'Project')}")
+    st.markdown(project.get("problem", ""))
+
+    st.write("")
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("### User decision")
+        st.markdown(project.get("user_decision", ""))
+        st.markdown("### Solution")
+        st.markdown(project.get("solution", ""))
+
+    with right:
+        st.markdown("### Artificial intelligence contribution")
+        st.markdown(project.get("ai_contribution", ""))
+        st.markdown("### Human contribution")
+        st.markdown(project.get("human_contribution", ""))
+
+    st.write("")
+    st.markdown("### Business value")
+    st.markdown(project.get("business_value", ""))
+
+    st.markdown("### Limitations")
+    st.markdown(project.get("limitations", ""))
+
+    st.markdown("### Stack")
+    render_project_tags(project.get("stack", []))
+
+    st.markdown("### Relevant roles")
+    render_project_tags(project.get("relevant_roles", []))
+
+    st.write("")
+    st.link_button("Open repository", project.get("repository", "#"))
+
+
 def proof_page():
     render_page_heading(
         "Evidence over claims",
@@ -315,43 +436,62 @@ def proof_page():
         "Each project connects a real problem, user decision, solution, artificial intelligence contribution, human judgment, limitation, and business value.",
     )
 
+    selected_title = st.session_state.get("selected_project")
+    selected_project = next(
+        (project for project in projects if project.get("title") == selected_title),
+        None,
+    )
+
+    if selected_project:
+        render_project_detail(selected_project)
+        return
+
     status_filter = st.selectbox(
-        "Filter projects",
+        "Project status",
         ["All projects", "Flagship", "Supporting"],
     )
 
-    visible_projects = projects
+    all_stacks = sorted(
+        {stack for project in projects for stack in project.get("stack", [])}
+    )
+    all_roles = sorted(
+        {role for project in projects for role in project.get("relevant_roles", [])}
+    )
+
+    stack_filter = st.multiselect("Filter by stack", all_stacks)
+    role_filter = st.multiselect("Filter by relevant role", all_roles)
+
+    visible_projects = ordered_projects()
+
     if status_filter != "All projects":
-        visible_projects = [project for project in projects if project.get("status") == status_filter]
+        visible_projects = [
+            project for project in visible_projects if project.get("status") == status_filter
+        ]
+
+    if stack_filter:
+        visible_projects = [
+            project
+            for project in visible_projects
+            if set(stack_filter).issubset(set(project.get("stack", [])))
+        ]
+
+    if role_filter:
+        visible_projects = [
+            project
+            for project in visible_projects
+            if set(role_filter).issubset(set(project.get("relevant_roles", [])))
+        ]
 
     if not visible_projects:
-        render_empty_state("No projects match this filter yet.")
+        render_empty_state("No projects match these filters yet.")
         return
 
-    for project in visible_projects:
-        with st.expander(f"{project['title']} · {project.get('status', 'Project')}"):
-            st.markdown(f"**Problem**\n\n{project.get('problem', '')}")
-            st.markdown(f"**User decision**\n\n{project.get('user_decision', '')}")
-            st.markdown(f"**Solution**\n\n{project.get('solution', '')}")
-
-            left, right = st.columns(2)
-            with left:
-                st.markdown("**Artificial intelligence contribution**")
-                st.markdown(project.get("ai_contribution", ""))
-            with right:
-                st.markdown("**Human contribution**")
-                st.markdown(project.get("human_contribution", ""))
-
-            st.markdown(f"**Limitations**\n\n{project.get('limitations', '')}")
-            st.markdown(f"**Business value**\n\n{project.get('business_value', '')}")
-
-            st.markdown("**Stack**")
-            st.markdown(", ".join(project.get("stack", [])))
-
-            st.markdown("**Relevant roles**")
-            st.markdown(", ".join(project.get("relevant_roles", [])))
-
-            st.link_button("Open repository", project.get("repository", "#"))
+    st.write("")
+    for index in range(0, len(visible_projects), 3):
+        columns = st.columns(3)
+        for column, project in zip(columns, visible_projects[index : index + 3]):
+            with column:
+                render_project_card(project)
 
 
 def ledger_page():
