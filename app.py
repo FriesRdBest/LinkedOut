@@ -1,11 +1,25 @@
 import streamlit as st
 
+from src.data_loader import (
+    load_applications,
+    load_capabilities,
+    load_decisions,
+    load_profile,
+    load_projects,
+)
+
 st.set_page_config(
     page_title="LinkedOut",
     page_icon="◈",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+profile = load_profile()
+projects = load_projects()
+applications = load_applications()
+capabilities = load_capabilities()
+decisions = load_decisions()
 
 PRIMARY = "#37E0C8"
 MUTED = "#93A4B5"
@@ -145,7 +159,7 @@ st.markdown(
         margin-bottom: 1.8rem;
       }}
 
-      .coming-soon {{
+      .empty-state {{
         border: 1px dashed {BORDER};
         border-radius: 18px;
         padding: 2.2rem;
@@ -176,13 +190,19 @@ def render_page_heading(eyebrow, title, introduction):
     )
 
 
-def render_coming_soon(message):
-    st.markdown(f'<div class="coming-soon">{message}</div>', unsafe_allow_html=True)
+def render_empty_state(message):
+    st.markdown(f'<div class="empty-state">{message}</div>', unsafe_allow_html=True)
+
+
+def render_status_pill(text):
+    st.markdown(f'<div class="status-pill">{text}</div>', unsafe_allow_html=True)
 
 
 def signal_page():
+    metrics = profile.get("headline_metrics", {})
+
     st.markdown(
-        """
+        f"""
         <div class="hero">
           <div class="eyebrow">Proof of work career application</div>
           <h1>LinkedOut</h1>
@@ -201,21 +221,22 @@ def signal_page():
 
     with left:
         st.markdown(
-            """
+            f"""
             <div class="metric-card">
-              <div class="metric-value">8</div>
-              <div class="metric-label">Public repositories audited for this portfolio</div>
+              <div class="metric-value">{metrics.get('public_repositories', len(projects))}</div>
+              <div class="metric-label">Public repositories represented in this portfolio</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
     with middle:
+        flagship_count = sum(1 for project in projects if project.get("status") == "Flagship")
         st.markdown(
-            """
+            f"""
             <div class="metric-card">
-              <div class="metric-value">4</div>
-              <div class="metric-label">Flagship case studies planned for deep presentation</div>
+              <div class="metric-value">{flagship_count}</div>
+              <div class="metric-label">Flagship case studies presented in depth</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -223,10 +244,10 @@ def signal_page():
 
     with right:
         st.markdown(
-            """
+            f"""
             <div class="metric-card">
-              <div class="metric-value">8</div>
-              <div class="metric-label">Career sections designed around evidence and decisions</div>
+              <div class="metric-value">{len(capabilities)}</div>
+              <div class="metric-label">Capabilities connected to observable evidence</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -234,38 +255,25 @@ def signal_page():
 
     st.write("")
     st.markdown("### Current focus")
-    st.markdown(
-        """
-        Building AI enabled operational products that make work measurable, usable, and governable.
+    st.markdown(profile.get("current_focus", ""))
 
-        The current focus includes Python, Streamlit, workflow automation, design governance,
-        data quality, product operations, and proof of work applications.
-        """
-    )
-
-    st.markdown("### Primary capabilities")
-    capability_columns = st.columns(3)
-    capabilities = [
-        "Python and Streamlit",
-        "Workflow automation",
-        "AI product prototyping",
-        "Design governance",
-        "Data quality",
-        "Operational dashboards",
-    ]
-
-    for column, capability in zip(capability_columns, capabilities):
-        with column:
-            st.markdown(
-                f'<div class="section-card"><h3>{capability}</h3></div>',
-                unsafe_allow_html=True,
-            )
+    st.markdown("### Primary skills")
+    skills = profile.get("primary_skills", [])
+    for index in range(0, len(skills), 3):
+        columns = st.columns(3)
+        for column, skill in zip(columns, skills[index : index + 3]):
+            with column:
+                st.markdown(
+                    f'<div class="section-card"><h3>{skill}</h3></div>',
+                    unsafe_allow_html=True,
+                )
 
     st.write("")
-    st.markdown(
-        '<div class="status-pill">Phase 1 foundation complete</div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown("### Currently exploring")
+    st.markdown(", ".join(profile.get("current_exploration", [])))
+
+    st.write("")
+    render_status_pill("Data driven career application")
 
 
 def operating_model_page():
@@ -304,36 +312,108 @@ def proof_page():
     render_page_heading(
         "Evidence over claims",
         "Proof of Work",
-        "This section will present repositories as complete case studies. Each case study will explain the problem, user decision, architecture, artificial intelligence contribution, human judgment, limitations, and business value.",
+        "Each project connects a real problem, user decision, solution, artificial intelligence contribution, human judgment, limitation, and business value.",
     )
-    render_coming_soon("Proof of Work arrives in Phase 4.")
+
+    status_filter = st.selectbox(
+        "Filter projects",
+        ["All projects", "Flagship", "Supporting"],
+    )
+
+    visible_projects = projects
+    if status_filter != "All projects":
+        visible_projects = [project for project in projects if project.get("status") == status_filter]
+
+    if not visible_projects:
+        render_empty_state("No projects match this filter yet.")
+        return
+
+    for project in visible_projects:
+        with st.expander(f"{project['title']} · {project.get('status', 'Project')}"):
+            st.markdown(f"**Problem**\n\n{project.get('problem', '')}")
+            st.markdown(f"**User decision**\n\n{project.get('user_decision', '')}")
+            st.markdown(f"**Solution**\n\n{project.get('solution', '')}")
+
+            left, right = st.columns(2)
+            with left:
+                st.markdown("**Artificial intelligence contribution**")
+                st.markdown(project.get("ai_contribution", ""))
+            with right:
+                st.markdown("**Human contribution**")
+                st.markdown(project.get("human_contribution", ""))
+
+            st.markdown(f"**Limitations**\n\n{project.get('limitations', '')}")
+            st.markdown(f"**Business value**\n\n{project.get('business_value', '')}")
+
+            st.markdown("**Stack**")
+            st.markdown(", ".join(project.get("stack", [])))
+
+            st.markdown("**Relevant roles**")
+            st.markdown(", ".join(project.get("relevant_roles", [])))
+
+            st.link_button("Open repository", project.get("repository", "#"))
 
 
 def ledger_page():
     render_page_heading(
         "The search as evidence",
         "Application Ledger",
-        "This section will record roles pursued, custom artifacts created for each opportunity, application status, outcomes, and reusable learning.",
+        "This ledger records roles pursued, custom artifacts created for each opportunity, application status, outcomes, and reusable learning.",
     )
-    render_coming_soon("Application Ledger arrives in Phase 5.")
+
+    if not applications:
+        render_empty_state(
+            "No applications have been recorded yet. Each future application can include a custom artifact, status, outcome, and reusable learning."
+        )
+        return
+
+    for application in applications:
+        with st.expander(f"{application.get('role', 'Role')} · {application.get('company', 'Company')}"):
+            st.markdown(f"**Applied on**\n\n{application.get('date', 'Not recorded')}")
+            st.markdown(f"**Source**\n\n{application.get('source', 'Not recorded')}")
+            st.markdown(f"**Status**\n\n{application.get('status', 'Not recorded')}")
+            st.markdown(f"**Artifact created**\n\n{application.get('artifact', 'Not recorded')}")
+            st.markdown(f"**Outcome**\n\n{application.get('outcome', 'Pending')}")
+            st.markdown(f"**Learning**\n\n{application.get('learning', 'Not recorded')}")
+
+            artifact_url = application.get("artifact_url")
+            if artifact_url:
+                st.link_button("Open application artifact", artifact_url)
 
 
 def capability_page():
     render_page_heading(
         "Skills with evidence",
         "Capability Map",
-        "This section will connect every capability to repositories, demonstrations, screenshots, and application artifacts rather than self assigned ratings.",
+        "Every capability connects to projects, demonstrations, and application artifacts rather than self assigned ratings.",
     )
-    render_coming_soon("Capability Map arrives in Phase 7.")
+
+    for capability in capabilities:
+        with st.expander(capability.get("name", "Capability")):
+            render_status_pill(capability.get("evidence_strength", "Demonstrated"))
+            st.write("")
+            st.markdown("**Evidence**")
+            st.markdown(", ".join(capability.get("evidence", [])))
+            st.markdown("**Relevant roles**")
+            st.markdown(", ".join(capability.get("relevant_roles", [])))
 
 
 def decisions_page():
     render_page_heading(
         "Judgment in the open",
         "Decision Records",
-        "This section will explain the choices behind each project, including alternatives considered, tradeoffs accepted, risks identified, and improvements planned.",
+        "These records explain the choices behind each project, including alternatives considered, tradeoffs accepted, risks identified, and improvements planned.",
     )
-    render_coming_soon("Decision Records arrive in Phase 8.")
+
+    for decision in decisions:
+        with st.expander(f"{decision.get('project', 'Project')} · {decision.get('title', 'Decision')}"):
+            st.markdown(f"**Decision**\n\n{decision.get('decision', '')}")
+            st.markdown("**Alternatives considered**")
+            st.markdown(", ".join(decision.get("alternatives_considered", [])))
+            st.markdown(f"**Tradeoff**\n\n{decision.get('tradeoff', '')}")
+            st.markdown(f"**Risk**\n\n{decision.get('risk', '')}")
+            st.markdown(f"**Artificial intelligence limitation**\n\n{decision.get('ai_limitation', '')}")
+            st.markdown(f"**Next improvement**\n\n{decision.get('next_improvement', '')}")
 
 
 def lab_page():
@@ -342,7 +422,7 @@ def lab_page():
         "Live Lab",
         "This section will provide direct access to interactive demonstrations, sample data policies, and clear instructions for exploring each application.",
     )
-    render_coming_soon("Live Lab arrives in Phase 9.")
+    render_empty_state("Live Lab arrives in Phase 9.")
 
 
 def contact_page():
@@ -351,7 +431,7 @@ def contact_page():
         "Contact",
         "This section will provide a direct route to discuss AI product work, operational tooling, design systems, workflow automation, or a specific opportunity.",
     )
-    render_coming_soon("Contact experience arrives in Phase 10.")
+    render_empty_state("Contact experience arrives in Phase 10.")
 
 
 PAGES = {
@@ -385,10 +465,10 @@ with st.sidebar:
 
     st.write("")
     st.markdown(
-        """
+        f"""
         <div class="linkedout-subtitle">
-          Built with Python and Streamlit.<br>
-          Designed for evidence first career presentation.
+          {profile.get('career_identity', '')}<br>
+          {profile.get('location', '')}
         </div>
         """,
         unsafe_allow_html=True,
