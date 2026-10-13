@@ -211,6 +211,14 @@ st.markdown(
         background: rgba(14, 20, 27, 0.65);
       }}
 
+      .stage-number {{
+        color: {PRIMARY};
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }}
+
       @media (max-width: 768px) {{
         .hero {{ padding: 1.6rem; }}
         .hero h1 {{ font-size: 1.9rem; }}
@@ -328,32 +336,130 @@ def operating_model_page():
     render_page_heading(
         "How work happens",
         "Operating Model",
-        "A repeatable method for turning operational friction into working software. Each stage connects discovery, design, validation, governance, and delivery.",
+        "A repeatable method for turning operational friction into working software. Every stage produces an observable output and connects to real proof of work.",
     )
 
     stages = [
-        ("Diagnose", "Identify the operational bottleneck and define the decision the user needs to make."),
-        ("Model", "Map the workflow, data, roles, exceptions, and measures of success."),
-        ("Prototype", "Create a usable Python and Streamlit interface that makes the workflow visible."),
-        ("Validate", "Test the solution against real scenarios, edge cases, and stakeholder expectations."),
-        ("Govern", "Document assumptions, quality checks, accessibility, versioning, and limitations."),
-        ("Deploy and iterate", "Package the solution, deploy it, collect feedback, and improve it."),
+        {
+            "number": "Stage 1",
+            "title": "Diagnose",
+            "description": "Identify the operational bottleneck, understand the people involved, and define the decision the user needs to make.",
+            "output": "A clear problem statement, target user, decision to support, and success measure.",
+            "projects": ["Meeting Memory Hub", "Ghost Support Operations Engine"],
+        },
+        {
+            "number": "Stage 2",
+            "title": "Model",
+            "description": "Map the workflow, data, roles, exceptions, dependencies, and measures of success.",
+            "output": "A workflow model, data requirements, role map, exception handling approach, and success criteria.",
+            "projects": ["Traceboard", "Pattern Library"],
+        },
+        {
+            "number": "Stage 3",
+            "title": "Prototype",
+            "description": "Create a usable Python and Streamlit interface that makes the workflow visible and testable.",
+            "output": "A working prototype with a clear interface, core workflow, and controlled sample data.",
+            "projects": ["Providence", "Signal Field", "Plus Slop Stopper"],
+        },
+        {
+            "number": "Stage 4",
+            "title": "Validate",
+            "description": "Test the solution against real scenarios, edge cases, stakeholder expectations, and operational constraints.",
+            "output": "A validated prototype with documented assumptions, test scenarios, and required refinements.",
+            "projects": ["Sash", "Providence"],
+        },
+        {
+            "number": "Stage 5",
+            "title": "Govern",
+            "description": "Document assumptions, quality checks, accessibility, versioning, traceability, and limitations.",
+            "output": "A governed solution with quality controls, accessibility considerations, and transparent limitations.",
+            "projects": ["Traceboard", "Meeting Memory Hub"],
+        },
+        {
+            "number": "Stage 6",
+            "title": "Deploy and iterate",
+            "description": "Package the solution, deploy it, collect feedback, and improve it through controlled iterations.",
+            "output": "A deployed application with a feedback loop and a practical improvement path.",
+            "projects": ["Sash", "Providence"],
+        },
     ]
 
-    for index in range(0, len(stages), 3):
-        columns = st.columns(3)
-        for column, item in zip(columns, stages[index : index + 3]):
-            title, description = item
-            with column:
-                st.markdown(
-                    f"""
-                    <div class="section-card">
-                      <h3>{title}</h3>
-                      <p>{description}</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
+    for stage in stages:
+        with st.expander(f"{stage['number']} · {stage['title']}"):
+            st.markdown(stage["description"])
+            st.markdown("**Output**")
+            st.markdown(stage["output"])
+            st.markdown("**Related proof of work**")
+            st.markdown(", ".join(stage["projects"]))
+
+    st.write("")
+    st.markdown("## How artificial intelligence accelerates work")
+
+    acceleration_columns = st.columns(3)
+    acceleration_items = [
+        ("Research and synthesis", "Artificial intelligence accelerates research, pattern recognition, documentation, and early interface exploration."),
+        ("Prototype velocity", "It reduces the time required to move from an operational problem to a testable Python and Streamlit prototype."),
+        ("Quality support", "It helps identify gaps, generate checks, and improve documentation, while human judgment remains accountable."),
+    ]
+
+    for column, item in zip(acceleration_columns, acceleration_items):
+        title, description = item
+        with column:
+            st.markdown(
+                f"""
+                <div class="section-card">
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    st.write("")
+    st.markdown("## Decisions that remain human owned")
+
+    human_columns = st.columns(3)
+    human_items = [
+        ("Problem definition", "The operational problem, stakeholder needs, and definition of success must be understood and validated by people."),
+        ("Business judgment", "Tradeoffs, priorities, risks, governance standards, and deployment decisions require accountable human judgment."),
+        ("Validation and trust", "Artificial intelligence output must be tested against real scenarios before it can inform an operational decision."),
+    ]
+
+    for column, item in zip(human_columns, human_items):
+        title, description = item
+        with column:
+            st.markdown(
+                f"""
+                <div class="section-card">
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    st.write("")
+    st.markdown("## Working with me")
+
+    collaboration_columns = st.columns(3)
+    collaboration_items = [
+        ("Clear communication", "I translate operational friction, technical constraints, and product decisions into language stakeholders can act on."),
+        ("Evidence led feedback", "I welcome feedback, test assumptions, document decisions, and refine work based on observable results."),
+        ("Reliable handoff", "I leave behind clear documentation, known limitations, decision records, and a practical path for continued improvement."),
+    ]
+
+    for column, item in zip(collaboration_columns, collaboration_items):
+        title, description = item
+        with column:
+            st.markdown(
+                f"""
+                <div class="section-card">
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
 
 def ordered_projects():
