@@ -1,3 +1,6 @@
+import io
+
+import pandas as pd
 import streamlit as st
 
 from src.data_loader import (
@@ -498,27 +501,138 @@ def ledger_page():
     render_page_heading(
         "The search as evidence",
         "Application Ledger",
-        "This ledger records roles pursued, custom artifacts created for each opportunity, application status, outcomes, and reusable learning.",
+        "A transparent record of roles pursued, custom artifacts created for each opportunity, application status, outcomes, and reusable learning.",
     )
 
-    if not applications:
-        render_empty_state(
-            "No applications have been recorded yet. Each future application can include a custom artifact, status, outcome, and reusable learning."
+    active_statuses = ["Submitted", "Screening", "Interview"]
+    total_applications = len(applications)
+    active_applications = sum(
+        1 for application in applications if application.get("status") in active_statuses
+    )
+    interview_applications = sum(
+        1 for application in applications if application.get("status") == "Interview"
+    )
+    artifact_count = sum(
+        1 for application in applications if application.get("artifact")
+    )
+
+    first, second, third, fourth = st.columns(4)
+
+    with first:
+        st.markdown(
+            f"""
+            <div class="metric-card">
+              <div class="metric-value">{total_applications}</div>
+              <div class="metric-label">Applications recorded</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
-        return
 
-    for application in applications:
-        with st.expander(f"{application.get('role', 'Role')} · {application.get('company', 'Company')}"):
-            st.markdown(f"**Applied on**\n\n{application.get('date', 'Not recorded')}")
-            st.markdown(f"**Source**\n\n{application.get('source', 'Not recorded')}")
-            st.markdown(f"**Status**\n\n{application.get('status', 'Not recorded')}")
-            st.markdown(f"**Artifact created**\n\n{application.get('artifact', 'Not recorded')}")
-            st.markdown(f"**Outcome**\n\n{application.get('outcome', 'Pending')}")
-            st.markdown(f"**Learning**\n\n{application.get('learning', 'Not recorded')}")
+    with second:
+        st.markdown(
+            f"""
+            <div class="metric-card">
+              <div class="metric-value">{active_applications}</div>
+              <div class="metric-label">Active applications</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-            artifact_url = application.get("artifact_url")
-            if artifact_url:
-                st.link_button("Open application artifact", artifact_url)
+    with third:
+        st.markdown(
+            f"""
+            <div class="metric-card">
+              <div class="metric-value">{interview_applications}</div>
+              <div class="metric-label">Interview stage</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with fourth:
+        st.markdown(
+            f"""
+            <div class="metric-card">
+              <div class="metric-value">{artifact_count}</div>
+              <div class="metric-label">Custom artifacts created</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.write("")
+
+    status_filter = st.selectbox(
+        "Filter by status",
+        [
+            "All statuses",
+            "Researching",
+            "Submitted",
+            "Screening",
+            "Interview",
+            "Offer",
+            "Rejected",
+            "Withdrawn",
+        ],
+    )
+
+    hide_companies = st.toggle("Hide company names", value=False)
+
+    visible_applications = applications
+    if status_filter != "All statuses":
+        visible_applications = [
+            application
+            for application in visible_applications
+            if application.get("status") == status_filter
+        ]
+
+    if not visible_applications:
+        render_empty_state("No applications match this filter yet.")
+    else:
+        for application in visible_applications:
+            company = application.get("company", "Company")
+            if hide_companies:
+                company = "Private company"
+
+            example_label = "Representative example" if application.get("example_record") else "Application"
+
+            with st.expander(f"{application.get('role', 'Role')} · {company}"):
+                render_status_pill(f"{application.get('status', 'Not recorded')} · {example_label}")
+                st.write("")
+                st.markdown(f"**Applied on**\n\n{application.get('date', 'Not recorded')}")
+                st.markdown(f"**Source**\n\n{application.get('source', 'Not recorded')}")
+                st.markdown(f"**Custom artifact**\n\n{application.get('artifact', 'Not recorded')}")
+
+                left, right = st.columns(2)
+                with left:
+                    st.markdown("**Artificial intelligence contribution**")
+                    st.markdown(application.get("ai_contribution", ""))
+                with right:
+                    st.markdown("**Human contribution**")
+                    st.markdown(application.get("human_contribution", ""))
+
+                st.markdown(f"**Time invested**\n\n{application.get('time_invested', 'Not recorded')}")
+                st.markdown(f"**Outcome**\n\n{application.get('outcome', 'Pending')}")
+                st.markdown(f"**Learning**\n\n{application.get('learning', 'Not recorded')}")
+                st.markdown(f"**Reuse potential**\n\n{application.get('reuse_potential', 'Not recorded')}")
+
+                artifact_url = application.get("artifact_url")
+                if artifact_url:
+                    st.link_button("Open application artifact", artifact_url)
+
+    st.write("")
+    if applications:
+        ledger_frame = pandas.DataFrame(applications)
+        export_buffer = io.StringIO()
+        ledger_frame.to_csv(export_buffer, index=False)
+        st.download_button(
+            "Download application ledger as CSV",
+            data=export_buffer.getvalue(),
+            file_name="linkedout_application_ledger.csv",
+            mime="text/csv",
+        )
 
 
 def capability_page():

@@ -1,1 +1,29 @@
-applications: []
+applications:
+  - date: "2026-10-13"
+    role: AI Solutions Engineer
+    company: Example AI Company
+    example_record: true
+    source: Company career page
+    status: Submitted
+    artifact: Custom Streamlit workflow diagnostic inspired by the role requirements
+    artifact_url: ""
+    ai_contribution: Accelerated role analysis, workflow structure, interface prototyping, and documentation.
+    human_contribution: Defined the business problem, validation approach, workflow boundaries, and deployment considerations.
+    time_invested: "4 hours"
+    outcome: Pending
+    learning: Role specific artifacts are more useful when they address a clear operational decision rather than general AI capability.
+    reuse_potential: High. The workflow diagnostic structure can be adapted for similar AI implementation roles.
+  - date: "2026-10-13"
+    role: Product Operations Analyst
+    company: Example SaaS Company
+    example_record: true
+    source: Job board
+    status: Screening
+    artifact: Operational dashboard prototype with a data quality checklist
+    artifact_url: ""
+    ai_contribution: Accelerated dashboard layout, metric definitions, and quality check documentation.
+    human_contribution: Defined the operational workflow, data quality rules, stakeholder decisions, and validation scenarios.
+    time_invested: "3 hours"
+    outcome: Pending
+    learning: Operational roles respond well to evidence that connects data quality, workflow friction, and decision support.
+    reuse_potential: High. The dashboard prototype can be adapted for operations, business systems, and product operations roles.
