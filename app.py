@@ -40,6 +40,11 @@ st.markdown(
         color: #E8EEF4;
       }}
 
+      .block-container {{
+        padding: 2.5rem 3rem 4rem 3rem;
+        max-width: 1280px;
+      }}
+
       section[data-testid="stSidebar"] {{
         background: #080D12;
         border-right: 1px solid {BORDER};
@@ -67,11 +72,11 @@ st.markdown(
         border: 1px solid {BORDER};
         background: linear-gradient(145deg, rgba(55, 224, 200, 0.08), rgba(14, 20, 27, 0.94));
         border-radius: 22px;
-        padding: 2.2rem 2.4rem;
+        padding: 2.5rem 2.75rem;
       }}
 
       .hero h1 {{
-        font-size: 2.55rem;
+        font-size: 2.75rem;
         font-weight: 850;
         letter-spacing: -0.045em;
         line-height: 1.05;
@@ -80,7 +85,7 @@ st.markdown(
 
       .hero p {{
         color: #B9C6D2;
-        font-size: 1.03rem;
+        font-size: 1.05rem;
         line-height: 1.65;
         max-width: 760px;
         margin: 0;
@@ -99,27 +104,28 @@ st.markdown(
         background: {CARD};
         border: 1px solid {BORDER};
         border-radius: 18px;
-        padding: 1.25rem 1.35rem;
+        padding: 1.4rem 1.5rem;
         height: 100%;
       }}
 
       .metric-value {{
-        font-size: 1.9rem;
+        font-size: 2rem;
         font-weight: 800;
         letter-spacing: -0.03em;
       }}
 
       .metric-label {{
         color: {MUTED};
-        font-size: 0.82rem;
-        margin-top: 0.25rem;
+        font-size: 0.84rem;
+        margin-top: 0.3rem;
+        line-height: 1.4;
       }}
 
       .section-card {{
         background: {CARD};
         border: 1px solid {BORDER};
         border-radius: 18px;
-        padding: 1.5rem 1.6rem;
+        padding: 1.6rem 1.7rem;
         height: 100%;
       }}
 
@@ -140,11 +146,11 @@ st.markdown(
         background: {CARD};
         border: 1px solid {BORDER};
         border-radius: 20px;
-        padding: 1.5rem 1.55rem;
+        padding: 1.6rem 1.65rem;
         height: 100%;
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.8rem;
       }}
 
       .project-card h3 {{
@@ -189,7 +195,7 @@ st.markdown(
       }}
 
       .page-heading {{
-        font-size: 2rem;
+        font-size: 2.1rem;
         font-weight: 820;
         letter-spacing: -0.035em;
         margin-bottom: 0.4rem;
@@ -223,10 +229,11 @@ st.markdown(
         border: 1px solid {BORDER};
         background: rgba(255, 255, 255, 0.03);
         border-radius: 12px;
-        padding: 0.8rem 1rem;
+        padding: 0.9rem 1.1rem;
         margin: 0.3rem 0;
         color: #C7D3DE;
-        font-size: 0.88rem;
+        font-size: 0.9rem;
+        line-height: 1.55;
       }}
 
       .workflow-arrow {{
@@ -235,10 +242,34 @@ st.markdown(
         font-size: 1.1rem;
       }}
 
-      @media (max-width: 768px) {{
-        .hero {{ padding: 1.6rem; }}
-        .hero h1 {{ font-size: 1.9rem; }}
+      @media (max-width: 1279px) {{
+        .block-container {{
+          padding: 2rem 2.25rem 3.5rem 2.25rem;
+        }}
+        .hero {{ padding: 2.2rem 2.4rem; }}
+        .hero h1 {{ font-size: 2.4rem; }}
+      }}
+
+      @media (max-width: 767px) {{
+        .block-container {{
+          padding: 1.5rem 1.1rem 3rem 1.1rem;
+        }}
+        .hero {{ padding: 1.6rem 1.4rem; border-radius: 18px; }}
+        .hero h1 {{ font-size: 1.85rem; }}
+        .hero p {{ font-size: 0.98rem; }}
         .page-heading {{ font-size: 1.55rem; }}
+        .metric-card {{ padding: 1.15rem 1.2rem; }}
+        .metric-value {{ font-size: 1.6rem; }}
+        .section-card {{ padding: 1.3rem 1.3rem; }}
+        .project-card {{ padding: 1.3rem 1.3rem; }}
+      }}
+
+      @media (max-width: 400px) {{
+        .block-container {{
+          padding: 1.1rem 0.75rem 2.5rem 0.75rem;
+        }}
+        .hero {{ padding: 1.3rem 1rem; }}
+        .hero h1 {{ font-size: 1.6rem; }}
       }}
     </style>
     """,
