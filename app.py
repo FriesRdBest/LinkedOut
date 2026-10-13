@@ -812,8 +812,40 @@ def decisions_page():
         "These records explain the choices behind each project, including alternatives considered, tradeoffs accepted, risks identified, and improvements planned.",
     )
 
-    for decision in decisions:
+    project_filter = st.selectbox(
+        "Filter by project",
+        ["All projects"] + sorted({decision.get("project", "") for decision in decisions}),
+    )
+
+    decision_type_filter = st.selectbox(
+        "Filter by decision type",
+        ["All decision types", "Architecture", "Product", "Data", "Governance", "Artificial intelligence"],
+    )
+
+    visible_decisions = decisions
+
+    if project_filter != "All projects":
+        visible_decisions = [
+            decision
+            for decision in visible_decisions
+            if decision.get("project") == project_filter
+        ]
+
+    if decision_type_filter != "All decision types":
+        visible_decisions = [
+            decision
+            for decision in visible_decisions
+            if decision.get("type") == decision_type_filter
+        ]
+
+    if not visible_decisions:
+        render_empty_state("No decision records match these filters yet.")
+        return
+
+    for decision in visible_decisions:
         with st.expander(f"{decision.get('project', 'Project')} · {decision.get('title', 'Decision')}"):
+            render_status_pill(decision.get("type", "Decision"))
+            st.write("")
             st.markdown(f"**Decision**\n\n{decision.get('decision', '')}")
             st.markdown("**Alternatives considered**")
             st.markdown(", ".join(decision.get("alternatives_considered", [])))
@@ -821,6 +853,19 @@ def decisions_page():
             st.markdown(f"**Risk**\n\n{decision.get('risk', '')}")
             st.markdown(f"**Artificial intelligence limitation**\n\n{decision.get('ai_limitation', '')}")
             st.markdown(f"**Next improvement**\n\n{decision.get('next_improvement', '')}")
+
+            related_project = next(
+                (project for project in projects if project.get("title") == decision.get("project")),
+                None,
+            )
+            if related_project:
+                if st.button(
+                    f"View {decision.get('project')} case study",
+                    key=f"decision_{decision.get('project', '').lower().replace(' ', '_')}_{decision.get('title', '').lower().replace(' ', '_')}",
+                ):
+                    st.session_state["selected_project"] = decision.get("project")
+                    st.session_state["return_to_decisions"] = True
+                    st.rerun()
 
 
 def lab_page():
