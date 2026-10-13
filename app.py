@@ -872,9 +872,47 @@ def lab_page():
     render_page_heading(
         "Working demonstrations",
         "Live Lab",
-        "This section will provide direct access to interactive demonstrations, sample data policies, and clear instructions for exploring each application.",
+        "Explore working applications through controlled demonstrations, sample data policies, and clear instructions.",
     )
-    render_empty_state("Live Lab arrives in Phase 9.")
+
+    project_titles = [project.get("title", "Project") for project in ordered_projects()]
+    selected_title = st.selectbox("Select a demonstration", project_titles)
+    selected_project = next(
+        (project for project in projects if project.get("title") == selected_title),
+        None,
+    )
+
+    if not selected_project:
+        render_empty_state("No demonstration selected.")
+        return
+
+    st.write("")
+    render_status_pill(selected_project.get("status", "Project"))
+    st.markdown(f"## {selected_project.get('title', 'Project')}")
+    st.markdown(selected_project.get("problem", ""))
+
+    st.write("")
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("### What to explore")
+        st.markdown(selected_project.get("demo_instructions", "Use the interface to follow the core workflow and observe how the solution supports the user decision."))
+
+    with right:
+        st.markdown("### Sample data policy")
+        st.markdown(selected_project.get("sample_data_policy", "This demonstration uses controlled sample data only. No confidential, personal, or production data is included."))
+
+    st.write("")
+    st.markdown("### Related case study")
+    if st.button(
+        f"View {selected_project.get('title')} case study",
+        key=f"lab_{selected_title.lower().replace(' ', '_')}",
+    ):
+        st.session_state["selected_project"] = selected_title
+        st.session_state["return_to_lab"] = True
+        st.rerun()
+
+    st.link_button("Open repository", selected_project.get("repository", "#"))
 
 
 def contact_page():
