@@ -919,9 +919,42 @@ def contact_page():
     render_page_heading(
         "Start a conversation",
         "Contact",
-        "This section will provide a direct route to discuss AI product work, operational tooling, design systems, workflow automation, or a specific opportunity.",
+        "Use this page to discuss AI product work, operational tooling, design systems, workflow automation, or a specific opportunity.",
     )
-    render_empty_state("Contact experience arrives in Phase 10.")
+
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("### Send a message")
+        name = st.text_input("Your name")
+        email = st.text_input("Your email")
+        topic = st.selectbox(
+            "What would you like to discuss?",
+            [
+                "AI product work",
+                "Operational tooling",
+                "Design systems",
+                "Workflow automation",
+                "A specific opportunity",
+            ],
+        )
+        message = st.text_area("Message")
+
+        if st.button("Send message"):
+            if name and email and message:
+                st.success("Thank you. Your message has been recorded for this demonstration.")
+            else:
+                st.warning("Please complete your name, email, and message.")
+
+    with right:
+        st.markdown("### Direct contact")
+        st.markdown("For a direct conversation, use email, LinkedIn, or schedule a short introduction call.")
+        st.link_button("Email me", f"mailto:{profile.get('email', '')}")
+        st.link_button("Connect on LinkedIn", profile.get("linkedin", "#"))
+        st.link_button("Schedule an introduction", profile.get("calendar", "#"))
+
+        st.markdown("### Response expectations")
+        st.markdown("I aim to respond within 1-2 business days. For time sensitive opportunities, mention the timeline in your message.")
 
 
 PAGES = {
