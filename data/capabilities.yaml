@@ -1,0 +1,70 @@
+capabilities:
+  - name: AI workflow prototyping
+    evidence_strength: Repeated
+    evidence:
+      - Meeting Memory Hub
+      - Sash
+      - Providence
+    relevant_roles:
+      - AI Solutions Engineer
+      - AI Implementation Engineer
+      - AI Product Builder
+  - name: Streamlit product delivery
+    evidence_strength: Repeated
+    evidence:
+      - Providence
+      - Signal Field
+      - Traceboard
+    relevant_roles:
+      - Product Builder
+      - Internal Tools Engineer
+      - Product Design Engineer
+  - name: Design governance
+    evidence_strength: Production oriented
+    evidence:
+      - Traceboard
+    relevant_roles:
+      - Design Systems Engineer
+      - DesignOps Specialist
+      - UX Engineer
+  - name: Accessibility and quality automation
+    evidence_strength: Production oriented
+    evidence:
+      - Traceboard
+    relevant_roles:
+      - UX Engineer
+      - AI Quality Analyst
+      - Design Systems Engineer
+  - name: Operational diagnostics
+    evidence_strength: Demonstrated
+    evidence:
+      - Ghost Support Operations Engine
+    relevant_roles:
+      - Support Operations Engineer
+      - Automation Analyst
+      - Customer Solutions Engineer
+  - name: Business value modeling
+    evidence_strength: Demonstrated
+    evidence:
+      - Plus Slop Stopper
+    relevant_roles:
+      - Product Analyst
+      - Solutions Consultant
+      - Revenue Operations Analyst
+  - name: Insight synthesis
+    evidence_strength: Demonstrated
+    evidence:
+      - Pattern Library
+    relevant_roles:
+      - Product Analyst
+      - Research Operations Specialist
+      - Product Operations Manager
+  - name: Data and dashboarding
+    evidence_strength: Demonstrated
+    evidence:
+      - Providence
+      - Traceboard
+    relevant_roles:
+      - BI Developer
+      - Analytics Engineer
+      - Data Product Analyst

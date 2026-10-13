@@ -1,0 +1,158 @@
+projects:
+  - title: Traceboard
+    repository: https://github.com/FriesRdBest/traceboard
+    status: Flagship
+    problem: Design and product teams need a dependable way to govern design tokens, component standards, accessibility, and version traceability across product surfaces.
+    user_decision: Determine whether a design asset, component, or product surface meets the required governance and accessibility standard.
+    solution: A governance dashboard that controls design tokens, enforces component standards, runs accessibility checks, and traces assets from design files to live code.
+    stack:
+      - Python
+      - Streamlit
+      - Design tokens
+      - Accessibility checks
+    ai_contribution: Accelerated pattern exploration, interface structure, documentation, and quality check design.
+    human_contribution: Defined the governance model, accessibility requirements, traceability approach, product boundaries, and evaluation standards.
+    limitations: The initial release focuses on governance and traceability rather than replacing an enterprise design system platform.
+    business_value: Reduces inconsistent interface decisions, improves accessibility oversight, and makes design implementation traceable.
+    relevant_roles:
+      - Design Systems Engineer
+      - UX Engineer
+      - DesignOps Specialist
+      - AI Product Builder
+  - title: Sash
+    repository: https://github.com/FriesRdBest/Sash
+    status: Flagship
+    problem: Teams using programmable customer communications need a faster and more dependable path from build readiness to deployment.
+    user_decision: Determine whether a customer communication workflow is ready to deploy and identify the remaining deployment risks.
+    solution: A production readiness and deployment accelerator for programmable customer communications.
+    stack:
+      - Python
+      - Deployment readiness
+      - Customer communications
+      - Workflow automation
+    ai_contribution: Accelerated readiness checks, documentation, workflow structure, and deployment guidance.
+    human_contribution: Defined the readiness criteria, deployment workflow, risk boundaries, and operational use cases.
+    limitations: The accelerator supports readiness and deployment planning rather than acting as a full communications platform.
+    business_value: Shortens preparation time, improves deployment confidence, and makes customer communication readiness more repeatable.
+    relevant_roles:
+      - AI Solutions Engineer
+      - Forward Deployed Engineer
+      - Implementation Consultant
+      - Customer Solutions Engineer
+  - title: Meeting Memory Hub
+    repository: https://github.com/FriesRdBest/meeting-memory-hub
+    status: Flagship
+    problem: Meeting insights often disappear after the call, leaving teams without auditable actions or shared organizational learning.
+    user_decision: Determine what a meeting means for ownership, follow up, organizational learning, and future decisions.
+    solution: A workspace that turns meeting signals into auditable action and organizational learning.
+    stack:
+      - Python
+      - Streamlit
+      - Meeting intelligence
+      - Workflow automation
+    ai_contribution: Accelerated signal extraction concepts, workspace structure, and knowledge organization patterns.
+    human_contribution: Defined the auditability standard, action model, learning workflow, and boundaries around automated interpretation.
+    limitations: The application is a proof of concept and requires controlled data before use with sensitive meeting material.
+    business_value: Makes meeting outcomes actionable, traceable, and reusable across teams.
+    relevant_roles:
+      - AI Operations Specialist
+      - AI Workflow Designer
+      - Product Analyst
+      - AI Product Builder
+  - title: Providence
+    repository: https://github.com/FriesRdBest/providence
+    status: Flagship
+    problem: Time based decisions require a clear way to explore signals, compare scenarios, and understand what changes over time.
+    user_decision: Understand time based patterns and make more informed operational decisions.
+    solution: A Time Intelligence Adaptive Engine built as a production oriented Streamlit proof of concept.
+    stack:
+      - Python
+      - Streamlit
+      - Time intelligence
+      - Decision support
+    ai_contribution: Accelerated interface development, data structure exploration, and proof of concept delivery.
+    human_contribution: Defined the decision problem, product direction, experience standards, and validation approach.
+    limitations: The current release is a proof of concept and should be connected to governed production data before operational use.
+    business_value: Makes time based information more usable for operational decisions and product exploration.
+    relevant_roles:
+      - Product Builder
+      - Data Product Analyst
+      - Internal Tools Engineer
+      - AI Product Builder
+  - title: Signal Field
+    repository: https://github.com/FriesRdBest/signal-field
+    status: Supporting
+    problem: Complex AI product experiences need a clear visual direction that supports comprehension without overwhelming the user.
+    user_decision: Evaluate a visual direction for a complex AI product experience.
+    solution: An independent visual direction exploration built with Python and Streamlit.
+    stack:
+      - Python
+      - Streamlit
+      - Visual design
+      - AI product experience
+    ai_contribution: Accelerated visual exploration, layout concepts, and interface prototyping.
+    human_contribution: Defined the visual direction, product feel, hierarchy, and experience boundaries.
+    limitations: This is a direction exploration rather than a complete production application.
+    business_value: Demonstrates the ability to translate complex AI concepts into a clear and credible product experience.
+    relevant_roles:
+      - Product Design Engineer
+      - UX Engineer
+      - AI Product Builder
+  - title: Plus Slop Stopper
+    repository: https://github.com/FriesRdBest/plus-slop-stopper
+    status: Supporting
+    problem: Enterprise go to market teams need a practical way to estimate workflow value and prevent low quality AI generated presentation output.
+    user_decision: Estimate annual return on investment, token ingestion pressure, and a practical implementation roadmap.
+    solution: An interactive calculator and live design token linting demonstration for enterprise go to market teams.
+    stack:
+      - Python
+      - Streamlit
+      - Return on investment modeling
+      - Design tokens
+    ai_contribution: Accelerated calculator logic, interface development, and demonstration structure.
+    human_contribution: Defined the business model, quality standard, roadmap structure, and demonstration boundaries.
+    limitations: The financial model is illustrative and should be calibrated with company specific inputs before executive use.
+    business_value: Helps teams quantify workflow value and reduce low quality AI output before it reaches customers.
+    relevant_roles:
+      - Product Analyst
+      - Solutions Consultant
+      - AI Quality Analyst
+      - Revenue Operations Analyst
+  - title: Ghost Support Operations Engine
+    repository: https://github.com/FriesRdBest/ghost-support-ops-engine
+    status: Supporting
+    problem: Support teams need faster diagnostics and repeatable operational checks for Ghost publishing environments.
+    user_decision: Identify likely support issues and determine the next operational action.
+    solution: A support operations engineering toolkit with automated diagnostics for Ghost publishers.
+    stack:
+      - Python
+      - Support operations
+      - Diagnostics
+      - Automation
+    ai_contribution: Accelerated diagnostic patterns, documentation, and operational tooling structure.
+    human_contribution: Defined the support workflow, diagnostic boundaries, and operational checks.
+    limitations: The toolkit is intended to support human diagnosis rather than replace support judgment.
+    business_value: Reduces repetitive support investigation and makes operational diagnostics more consistent.
+    relevant_roles:
+      - Support Operations Engineer
+      - Automation Analyst
+      - Customer Solutions Engineer
+  - title: Pattern Library
+    repository: https://github.com/FriesRdBest/pattern-library
+    status: Supporting
+    problem: Product and customer insights often recur but are not captured in a reusable, evidence led structure.
+    user_decision: Identify recurring product and customer patterns and connect them to evidence.
+    solution: An evidence led pattern library for recurring product and customer insights.
+    stack:
+      - Python
+      - Insight synthesis
+      - Product research
+      - Knowledge management
+    ai_contribution: Accelerated pattern structure, documentation, and knowledge organization.
+    human_contribution: Defined the evidence standard, pattern model, and insight classification approach.
+    limitations: The library depends on consistently captured evidence to remain useful over time.
+    business_value: Turns scattered observations into reusable product and customer knowledge.
+    relevant_roles:
+      - Product Analyst
+      - Research Operations Specialist
+      - Product Operations Manager

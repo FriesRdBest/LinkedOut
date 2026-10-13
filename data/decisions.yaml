@@ -1,0 +1,41 @@
+decisions:
+  - project: Traceboard
+    title: Prioritize governance and traceability
+    decision: Build traceability, design token control, component standards, and accessibility checks before expanding visual features.
+    alternatives_considered:
+      - Build a broader visual design tool first.
+      - Focus only on design token storage.
+    tradeoff: A narrower initial feature set in exchange for a more governable and trustworthy system.
+    risk: Teams may expect a complete design system platform rather than a governance layer.
+    ai_limitation: Artificial intelligence can help detect patterns and generate checks, but it cannot decide the governance standard or accept accountability for product risk.
+    next_improvement: Add deeper integration examples and automated regression checks for component contracts.
+  - project: Sash
+    title: Make deployment readiness explicit
+    decision: Treat deployment readiness as a structured workflow rather than a checklist buried in documentation.
+    alternatives_considered:
+      - Build a general deployment automation tool.
+      - Focus only on documentation generation.
+    tradeoff: More focused scope in exchange for clearer operational value.
+    risk: Readiness criteria must remain adaptable across different customer communication environments.
+    ai_limitation: Artificial intelligence can accelerate readiness analysis, but humans must validate deployment risk and approve release decisions.
+    next_improvement: Add environment specific readiness profiles and clearer deployment rollback guidance.
+  - project: Meeting Memory Hub
+    title: Make meeting knowledge auditable
+    decision: Prioritize auditable actions and organizational learning over automatic meeting summaries alone.
+    alternatives_considered:
+      - Build a simple meeting summary tool.
+      - Focus only on transcript search.
+    tradeoff: More structure and governance in exchange for a less immediate but more trustworthy workflow.
+    risk: Meeting data can be sensitive and requires strong boundaries before production use.
+    ai_limitation: Artificial intelligence can identify candidate signals, but humans must confirm meaning, ownership, and action.
+    next_improvement: Add explicit source linking, permission controls, and action ownership workflows.
+  - project: Providence
+    title: Build a decision product rather than a static dashboard
+    decision: Design Providence around time based decisions and adaptive exploration rather than fixed reporting views.
+    alternatives_considered:
+      - Build a conventional reporting dashboard.
+      - Focus only on chart generation.
+    tradeoff: More product complexity in exchange for stronger decision support.
+    risk: The proof of concept requires governed production data before operational adoption.
+    ai_limitation: Artificial intelligence can accelerate prototyping, but humans must define the decision context and validate interpretations.
+    next_improvement: Add scenario comparison, data lineage, and clearer validation controls.
