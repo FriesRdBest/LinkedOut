@@ -46,8 +46,56 @@ st.markdown(
       }}
 
       section[data-testid="stSidebar"] {{
-        background: #080D12;
-        border-right: 1px solid {BORDER};
+        background: transparent;
+        border-right: 0;
+      }}
+
+      section[data-testid="stSidebar"] > div {{
+        background: transparent;
+      }}
+
+      section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {{
+        padding-top: 0.35rem;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] {{
+        gap: 0.15rem;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label {{
+        width: 100%;
+        margin: 0;
+        padding: 0.62rem 0.75rem;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: #93A4B5;
+        font-size: 0.9rem;
+        font-weight: 560;
+        transition: color 160ms ease, background 160ms ease;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {{
+        background: transparent;
+        color: #E8EEF4;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {{
+        background: transparent;
+        color: #37E0C8;
+        font-weight: 760;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] p {{
+        color: #37E0C8;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label div:first-child {{
+        display: none;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label p {{
+        margin: 0;
       }}
 
       .linkedout-brand {{
@@ -242,6 +290,80 @@ st.markdown(
         font-size: 1.1rem;
       }}
 
+      .water-stage {{
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }}
+
+      .water-stage::before {{
+        content: "";
+        position: absolute;
+        inset: auto -8% -8% -8%;
+        height: var(--water-height, 44%);
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.72;
+        background:
+          radial-gradient(70% 35% at 22% 0%, rgba(55, 224, 200, 0.16), transparent 74%),
+          radial-gradient(65% 38% at 76% 18%, rgba(81, 160, 255, 0.10), transparent 72%),
+          linear-gradient(
+            180deg,
+            rgba(55, 224, 200, 0.035) 0%,
+            rgba(55, 224, 200, 0.085) 48%,
+            rgba(55, 224, 200, 0.13) 100%
+          );
+        border-top: 1px solid rgba(55, 224, 200, 0.17);
+        border-radius: 48% 52% 0 0 / 4% 4% 0 0;
+        transform-origin: center bottom;
+        animation: water-drift 15s ease-in-out infinite alternate;
+      }}
+
+      .water-stage::after {{
+        content: "";
+        position: absolute;
+        left: -10%;
+        bottom: calc(var(--water-height, 44%) - 0.15rem);
+        width: 120%;
+        height: 1.35rem;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.72;
+        background:
+          radial-gradient(
+            ellipse at 12% 50%,
+            transparent 0 46%,
+            rgba(55, 224, 200, 0.2) 48% 50%,
+            transparent 52%
+          ) 0 0 / 7.5rem 1.15rem repeat-x;
+        animation: water-ripple 11s linear infinite;
+      }}
+
+      @keyframes water-drift {{
+        0% {{
+          transform: translate3d(-1.5%, 0.35rem, 0) scaleX(1.01);
+        }}
+        100% {{
+          transform: translate3d(1.5%, -0.2rem, 0) scaleX(1.04);
+        }}
+      }}
+
+      @keyframes water-ripple {{
+        from {{
+          transform: translateX(0);
+        }}
+        to {{
+          transform: translateX(-7.5rem);
+        }}
+      }}
+
+      @media (prefers-reduced-motion: reduce) {{
+        .water-stage::before,
+        .water-stage::after {{
+          animation: none;
+        }}
+      }}
+
       @media (max-width: 1279px) {{
         .block-container {{
           padding: 2rem 2.25rem 3.5rem 2.25rem;
@@ -270,6 +392,404 @@ st.markdown(
         }}
         .hero {{ padding: 1.3rem 1rem; }}
         .hero h1 {{ font-size: 1.6rem; }}
+      }}
+
+      /* Visual Elevation Phase 4: editorial content system */
+
+      h1, h2, h3 {{
+        color: #F2F6F8;
+        letter-spacing: -0.03em;
+      }}
+
+      h2 {{
+        margin-top: 2.7rem;
+        margin-bottom: 0.9rem;
+        font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+        font-weight: 760;
+      }}
+
+      h3 {{
+        margin-top: 1.8rem;
+        margin-bottom: 0.65rem;
+        font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+        font-weight: 730;
+      }}
+
+      .page-heading {{
+        max-width: 880px;
+        font-size: clamp(2rem, 3.1vw, 3rem);
+        line-height: 1.06;
+        margin-bottom: 0.55rem;
+      }}
+
+      .page-intro {{
+        max-width: 720px;
+        color: #AEBCC7;
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-bottom: 2.25rem;
+      }}
+
+      .hero {{
+        position: relative;
+        box-shadow: 0 22px 80px rgba(0, 0, 0, 0.16);
+      }}
+
+      .hero::after {{
+        content: "";
+        position: absolute;
+        left: 2.75rem;
+        right: 2.75rem;
+        bottom: -1px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(55, 224, 200, 0.56),
+          transparent
+        );
+      }}
+
+      .metric-card,
+      .section-card,
+      .project-card {{
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }}
+
+      .metric-card:hover,
+      .section-card:hover,
+      .project-card:hover {{
+        transform: translateY(-2px);
+        border-color: rgba(55, 224, 200, 0.32);
+        background: linear-gradient(
+          145deg,
+          rgba(55, 224, 200, 0.055),
+          #0E141B 65%
+        );
+      }}
+
+      .metric-card {{
+        min-height: 8.35rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }}
+
+      .metric-value {{
+        color: #F2F6F8;
+      }}
+
+      .section-card {{
+        min-height: 9rem;
+      }}
+
+      .project-card {{
+        min-height: 15rem;
+      }}
+
+      .project-card h3 {{
+        margin-top: 0;
+      }}
+
+      .project-tags {{
+        margin: 0.7rem 0 0.9rem;
+      }}
+
+      .project-tag {{
+        border-color: rgba(147, 164, 181, 0.2);
+        color: #D5DFE7;
+      }}
+
+      .stButton > button,
+      .stDownloadButton > button,
+      .stLinkButton > a {{
+        min-height: 2.7rem;
+        border-radius: 10px;
+        border: 1px solid rgba(55, 224, 200, 0.38);
+        background: rgba(55, 224, 200, 0.075);
+        color: #E8EEF4;
+        font-weight: 680;
+        letter-spacing: -0.01em;
+        transition:
+          background 160ms ease,
+          border-color 160ms ease,
+          transform 160ms ease;
+      }}
+
+      .stButton > button:hover,
+      .stDownloadButton > button:hover,
+      .stLinkButton > a:hover {{
+        background: rgba(55, 224, 200, 0.14);
+        border-color: rgba(55, 224, 200, 0.72);
+        transform: translateY(-1px);
+        color: #FFFFFF;
+      }}
+
+      .stButton > button:focus-visible,
+      .stDownloadButton > button:focus-visible,
+      .stLinkButton > a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {{
+        outline: 2px solid #37E0C8 !important;
+        outline-offset: 3px;
+      }}
+
+      [data-testid="stExpander"] {{
+        border: 1px solid #1D2833;
+        border-radius: 14px;
+        background: rgba(14, 20, 27, 0.76);
+        overflow: hidden;
+        margin-bottom: 0.65rem;
+      }}
+
+      [data-testid="stExpander"]:hover {{
+        border-color: rgba(55, 224, 200, 0.28);
+      }}
+
+      [data-testid="stExpander"] summary {{
+        padding: 0.25rem 0.15rem;
+        font-weight: 680;
+        color: #E8EEF4;
+      }}
+
+      [data-testid="stExpanderDetails"] {{
+        border-top: 1px solid rgba(147, 164, 181, 0.12);
+        padding-top: 0.25rem;
+      }}
+
+      [data-testid="stSelectbox"],
+      [data-testid="stMultiSelect"],
+      [data-testid="stTextInput"],
+      [data-testid="stTextArea"] {{
+        margin-bottom: 0.75rem;
+      }}
+
+      [data-testid="stSelectbox"] label,
+      [data-testid="stMultiSelect"] label,
+      [data-testid="stTextInput"] label,
+      [data-testid="stTextArea"] label {{
+        color: #B8C5CF;
+        font-size: 0.84rem;
+        font-weight: 650;
+      }}
+
+      div[data-baseweb="select"] > div,
+      [data-testid="stTextInput"] input,
+      [data-testid="stTextArea"] textarea {{
+        border-color: #273540 !important;
+        background: rgba(14, 20, 27, 0.82) !important;
+        border-radius: 10px !important;
+        color: #E8EEF4 !important;
+      }}
+
+      .water-stage {{
+        padding-bottom: 1.25rem;
+      }}
+
+      @media (max-width: 767px) {{
+        h2 {{
+          margin-top: 2.15rem;
+        }}
+
+        .page-intro {{
+          margin-bottom: 1.65rem;
+          font-size: 0.95rem;
+        }}
+
+        .hero::after {{
+          left: 1.4rem;
+          right: 1.4rem;
+        }}
+
+        .metric-card {{
+          min-height: 7.25rem;
+        }}
+
+        .section-card,
+        .project-card {{
+          min-height: auto;
+        }}
+
+        [data-testid="stExpander"] {{
+          border-radius: 12px;
+        }}
+      }}
+
+      @media (prefers-reduced-motion: reduce) {{
+        .metric-card,
+        .section-card,
+        .project-card,
+        .stButton > button,
+        .stDownloadButton > button,
+        .stLinkButton > a {{
+          transition: none;
+        }}
+
+        .metric-card:hover,
+        .section-card:hover,
+        .project-card:hover,
+        .stButton > button:hover,
+        .stDownloadButton > button:hover,
+        .stLinkButton > a:hover {{
+          transform: none;
+        }}
+      }}
+
+      /* Visual Elevation Phase 5: final interface polish */
+
+      html {{
+        scroll-behavior: smooth;
+      }}
+
+      ::selection {{
+        background: rgba(55, 224, 200, 0.28);
+        color: #FFFFFF;
+      }}
+
+      .stApp {{
+        min-height: 100vh;
+      }}
+
+      .block-container {{
+        animation: linkedout-enter 340ms ease-out both;
+      }}
+
+      @keyframes linkedout-enter {{
+        from {{
+          opacity: 0;
+          transform: translateY(5px);
+        }}
+        to {{
+          opacity: 1;
+          transform: translateY(0);
+        }}
+      }}
+
+      section[data-testid="stSidebar"] {{
+        scrollbar-width: thin;
+        scrollbar-color: rgba(55, 224, 200, 0.28) transparent;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label {{
+        position: relative;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"]::before {{
+        content: "";
+        position: absolute;
+        left: -0.38rem;
+        top: 50%;
+        width: 0.18rem;
+        height: 1.15rem;
+        border-radius: 999px;
+        background: #37E0C8;
+        box-shadow: 0 0 18px rgba(55, 224, 200, 0.46);
+        transform: translateY(-50%);
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:hover::after {{
+        content: "";
+        position: absolute;
+        right: 0.1rem;
+        top: 50%;
+        width: 0.28rem;
+        height: 0.28rem;
+        border-radius: 50%;
+        background: rgba(55, 224, 200, 0.58);
+        transform: translateY(-50%);
+      }}
+
+      .linkedout-brand {{
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(147, 164, 181, 0.12);
+      }}
+
+      .linkedout-subtitle {{
+        max-width: 15.5rem;
+      }}
+
+      .status-pill {{
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }}
+
+      .workflow-box {{
+        position: relative;
+        overflow: hidden;
+      }}
+
+      .workflow-box::before {{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.8rem;
+        bottom: 0.8rem;
+        width: 2px;
+        border-radius: 99px;
+        background: linear-gradient(
+          180deg,
+          rgba(55, 224, 200, 0.72),
+          rgba(55, 224, 200, 0.08)
+        );
+      }}
+
+      .workflow-box {{
+        padding-left: 1.25rem;
+      }}
+
+      [data-testid="stExpander"] summary {{
+        transition: color 160ms ease;
+      }}
+
+      [data-testid="stExpander"]:hover summary {{
+        color: #37E0C8;
+      }}
+
+      [data-testid="stDataFrame"] {{
+        border: 1px solid #1D2833;
+        border-radius: 14px;
+        overflow: hidden;
+      }}
+
+      hr {{
+        border-color: rgba(147, 164, 181, 0.14);
+        margin: 2.1rem 0;
+      }}
+
+      @media (max-width: 767px) {{
+        .block-container {{
+          animation-duration: 240ms;
+        }}
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"]::before {{
+          left: -0.18rem;
+        }}
+
+        .linkedout-brand {{
+          padding-bottom: 0.6rem;
+        }}
+
+        .workflow-box::before {{
+          top: 0.65rem;
+          bottom: 0.65rem;
+        }}
+      }}
+
+      @media (prefers-reduced-motion: reduce) {{
+        html {{
+          scroll-behavior: auto;
+        }}
+
+        .block-container {{
+          animation: none;
+        }}
+
+        [data-testid="stExpander"] summary {{
+          transition: none;
+        }}
       }}
     </style>
     """,
@@ -1110,4 +1630,20 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
+water_levels = {
+    "Signal": "44%",
+    "Operating Model": "38%",
+    "Proof of Work": "31%",
+    "Application Ledger": "25%",
+    "Capability Map": "19%",
+    "Decision Records": "14%",
+    "Live Lab": "9%",
+    "Contact": "4%",
+}
+
+st.markdown(
+    f'<div class="water-stage" style="--water-height: {water_levels[selected_page]};">',
+    unsafe_allow_html=True,
+)
 PAGES[selected_page]()
+st.markdown("</div>", unsafe_allow_html=True)
