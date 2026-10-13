@@ -748,14 +748,61 @@ def capability_page():
         "Every capability connects to projects, demonstrations, and application artifacts rather than self assigned ratings.",
     )
 
-    for capability in capabilities:
+    evidence_filter = st.selectbox(
+        "Filter by evidence strength",
+        ["All evidence", "Production oriented", "Repeated", "Demonstrated"],
+    )
+
+    all_roles = sorted(
+        {role for capability in capabilities for role in capability.get("relevant_roles", [])}
+    )
+    role_filter = st.multiselect("Filter by relevant role", all_roles)
+
+    visible_capabilities = capabilities
+
+    if evidence_filter != "All evidence":
+        visible_capabilities = [
+            capability
+            for capability in visible_capabilities
+            if capability.get("evidence_strength") == evidence_filter
+        ]
+
+    if role_filter:
+        visible_capabilities = [
+            capability
+            for capability in visible_capabilities
+            if set(role_filter).issubset(set(capability.get("relevant_roles", [])))
+        ]
+
+    if not visible_capabilities:
+        render_empty_state("No capabilities match these filters yet.")
+        return
+
+    for capability in visible_capabilities:
         with st.expander(capability.get("name", "Capability")):
             render_status_pill(capability.get("evidence_strength", "Demonstrated"))
             st.write("")
             st.markdown("**Evidence**")
-            st.markdown(", ".join(capability.get("evidence", [])))
+
+            evidence_names = capability.get("evidence", [])
+            for evidence_name in evidence_names:
+                related_project = next(
+                    (project for project in projects if project.get("title") == evidence_name),
+                    None,
+                )
+                if related_project:
+                    if st.button(
+                        f"View {evidence_name} case study",
+                        key=f"capability_{capability.get('name', '').lower().replace(' ', '_')}_{evidence_name.lower().replace(' ', '_')}",
+                    ):
+                        st.session_state["selected_project"] = evidence_name
+                        st.session_state["return_to_capability"] = True
+                        st.rerun()
+                else:
+                    st.markdown(evidence_name)
+
             st.markdown("**Relevant roles**")
-            st.markdown(", ".join(capability.get("relevant_roles", [])))
+            render_project_tags(capability.get("relevant_roles", []))
 
 
 def decisions_page():
