@@ -871,6 +871,190 @@ st.markdown(
           transition: none;
         }}
       }}
+
+      /* LinkedOut Ocean Palette v1 */
+
+      .stApp {{
+        color: #EDF8FA;
+        background: linear-gradient(
+          180deg,
+          #174956 0%,
+          #123C49 42%,
+          #174955 76%,
+          #37636A 93%,
+          #B8AC8E 98%,
+          #D9C9A7 100%
+        ) !important;
+        background-attachment: fixed !important;
+        min-height: 100dvh;
+      }}
+
+      section[data-testid="stSidebar"],
+      section[data-testid="stSidebar"] > div,
+      section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {{
+        background: transparent !important;
+        border-right: none !important;
+      }}
+
+      .linkedout-brand,
+      h1, h2, h3,
+      .page-heading,
+      .metric-value {{
+        color: #F1FBFC !important;
+      }}
+
+      .linkedout-brand span,
+      .eyebrow {{
+        color: #37E0C8 !important;
+      }}
+
+      .linkedout-subtitle {{
+        color: #C4DDE2 !important;
+      }}
+
+      .linkedout-brand {{
+        border-bottom-color: rgba(196, 221, 226, 0.2) !important;
+      }}
+
+      .hero {{
+        background: linear-gradient(
+          135deg,
+          rgba(44, 111, 122, 0.96),
+          rgba(27, 75, 89, 0.96)
+        ) !important;
+        border-color: rgba(180, 223, 229, 0.3) !important;
+        box-shadow: 0 16px 48px rgba(5, 33, 41, 0.18) !important;
+      }}
+
+      .hero p,
+      .page-intro,
+      .section-card p,
+      .project-card p,
+      .metric-label {{
+        color: #D3E8EC !important;
+      }}
+
+      .metric-card,
+      .section-card,
+      .project-card {{
+        background: #205563 !important;
+        border-color: rgba(176, 217, 225, 0.28) !important;
+        box-shadow: 0 10px 28px rgba(5, 33, 41, 0.14) !important;
+      }}
+
+      .metric-card:hover,
+      .section-card:hover,
+      .project-card:hover {{
+        background: #286571 !important;
+        border-color: rgba(55, 224, 200, 0.65) !important;
+      }}
+
+      .workflow-box,
+      [data-testid="stExpander"],
+      .empty-state {{
+        background: #1E5361 !important;
+        border-color: rgba(176, 217, 225, 0.3) !important;
+        color: #D8ECEF !important;
+      }}
+
+      .project-tag {{
+        background: rgba(214, 234, 236, 0.09) !important;
+        border-color: rgba(196, 221, 226, 0.35) !important;
+        color: #E3F1F3 !important;
+      }}
+
+      .status-pill {{
+        background: rgba(55, 224, 200, 0.12) !important;
+        border-color: rgba(55, 224, 200, 0.55) !important;
+        color: #9CF4E5 !important;
+      }}
+
+      .stButton > button,
+      .stDownloadButton > button,
+      .stLinkButton > a {{
+        background: #23616B !important;
+        border-color: rgba(121, 225, 211, 0.6) !important;
+        color: #F2FCFC !important;
+        box-shadow: none !important;
+      }}
+
+      .stButton > button:hover,
+      .stDownloadButton > button:hover,
+      .stLinkButton > a:hover {{
+        background: #37E0C8 !important;
+        border-color: #37E0C8 !important;
+        color: #082F36 !important;
+      }}
+
+      .stButton > button:hover p,
+      .stDownloadButton > button:hover p,
+      .stLinkButton > a:hover p {{
+        color: #082F36 !important;
+      }}
+
+      [data-testid="stSelectbox"] label,
+      [data-testid="stMultiSelect"] label,
+      [data-testid="stTextInput"] label,
+      [data-testid="stTextArea"] label {{
+        color: #D3E8EC !important;
+      }}
+
+      div[data-baseweb="select"] > div,
+      [data-testid="stTextInput"] input,
+      [data-testid="stTextArea"] textarea {{
+        background: #194B59 !important;
+        border-color: #729DA6 !important;
+        color: #EFF9FB !important;
+      }}
+
+      input::placeholder,
+      textarea::placeholder {{
+        color: #B8D2D8 !important;
+        opacity: 1;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label {{
+        box-sizing: border-box;
+        background: transparent !important;
+        color: #CEE5E9 !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label p {{
+        color: inherit !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {{
+        background: rgba(55, 224, 200, 0.12) !important;
+        color: #FFFFFF !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked),
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {{
+        background: #37E0C8 !important;
+        color: #082F36 !important;
+        border-radius: 0 !important;
+        font-weight: 780 !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) p,
+      section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] p {{
+        color: #082F36 !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label::before,
+      section[data-testid="stSidebar"] div[role="radiogroup"] label::after {{
+        display: none !important;
+      }}
+
+      section[data-testid="stSidebar"] div[role="radiogroup"] label:focus-within {{
+        outline: 2px solid #F0DFBC;
+        outline-offset: 3px;
+      }}
+
+      hr {{
+        border-color: rgba(196, 221, 226, 0.25) !important;
+      }}
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -1725,5 +1909,967 @@ st.markdown(
     f'<div class="water-stage" style="--water-height: {water_levels[selected_page]};">',
     unsafe_allow_html=True,
 )
+
+# LinkedOut Shore Journey v3
+# Fixed coastal canvas; horizon lowers as the selected page progresses.
+
+shore_horizons = {
+    "Signal": 34,
+    "Operating Model": 41,
+    "Proof of Work": 48,
+    "Application Ledger": 55,
+    "Capability Map": 62,
+    "Decision Records": 69,
+    "Live Lab": 76,
+    "Contact": 83,
+}
+
+shore_css = """
+<style>
+/* Replace earlier background and water experiments. */
+.stApp {
+    --shore-horizon: HORIZON_VALUE%;
+    min-height: 100dvh;
+    color: #01232d !important;
+    background:
+        radial-gradient(
+            ellipse at 86% 0%,
+            rgba(255,255,255,0.94) 0%,
+            rgba(255,255,255,0.35) 12%,
+            transparent 34%
+        ),
+        linear-gradient(
+            to bottom,
+            #139fdd 0%,
+            #64d3f4 calc(var(--shore-horizon) - 10%),
+            #b8edfa var(--shore-horizon),
+            #168dc8 calc(var(--shore-horizon) + 0.3%),
+            #0876b7 calc(var(--shore-horizon) + 7%),
+            #24a9df 85%,
+            #75d4ec 91%,
+            #f8e8c9 94%,
+            #ead1a5 100%
+        ) !important;
+    background-attachment: fixed !important;
+    background-size: 100% 100dvh !important;
+}
+
+/* Clear old negative-layer backgrounds and empty-wrapper waves. */
+.stApp::before,
+.stApp::after,
+.water-stage::before,
+.water-stage::after {
+    content: none !important;
+    display: none !important;
+}
+
+.water-stage {
+    padding: 0 !important;
+}
+
+/* Shoreline remains at the bottom, regardless of page length. */
+[data-testid="stAppViewContainer"] {
+    background: transparent !important;
+    isolation: isolate;
+}
+
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    position: fixed;
+    left: -5%;
+    width: 110%;
+    bottom: 6vh;
+    height: 3.5vh;
+    min-height: 18px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(255,255,255,0.95) 0 45%,
+            transparent 48%
+        ) 0 0 / 100px 24px repeat-x,
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255,255,255,0.85) 65%,
+            rgba(255,255,255,0.4)
+        );
+    animation: shore-foam 14s ease-in-out infinite alternate;
+}
+
+[data-testid="stAppViewContainer"]::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6.5vh;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(
+            173deg,
+            transparent 0 16px,
+            rgba(255,250,235,0.28) 18px,
+            transparent 24px 46px
+        ),
+        linear-gradient(180deg, #fae9cb, #e8cda1);
+}
+
+/* Keep actual application content above the decorative shore. */
+section[data-testid="stMain"],
+section[data-testid="stSidebar"] {
+    position: relative;
+    z-index: 1;
+}
+
+section[data-testid="stMain"] {
+    background: transparent !important;
+}
+
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div,
+section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+    background: transparent !important;
+    border-right: 0 !important;
+}
+
+header[data-testid="stHeader"],
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+
+/* Light, readable surfaces rather than dark ocean dashboard panels. */
+.hero,
+.metric-card,
+.section-card,
+.project-card,
+.workflow-box,
+.empty-state,
+[data-testid="stExpander"] {
+    background: rgba(248,253,255,0.94) !important;
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    box-shadow: 0 8px 28px rgba(1,35,45,0.12) !important;
+    color: #01232d !important;
+}
+
+.hero:hover,
+.metric-card:hover,
+.section-card:hover,
+.project-card:hover {
+    background: #f8fdff !important;
+    border-color: #b5e3f2 !important;
+}
+
+.hero::after,
+.workflow-box::before {
+    display: none !important;
+}
+
+h1, h2, h3,
+.page-heading,
+.metric-value,
+.linkedout-brand {
+    color: #01232d !important;
+}
+
+.hero p,
+.page-intro,
+.metric-label,
+.section-card p,
+.project-card p,
+.linkedout-subtitle,
+.empty-state {
+    color: #234957 !important;
+}
+
+.linkedout-brand span,
+.eyebrow,
+.workflow-arrow {
+    color: #006a94 !important;
+}
+
+[data-testid="stMarkdownContainer"] {
+    color: #01232d !important;
+}
+
+.linkedout-brand {
+    border-bottom-color: rgba(1,35,45,0.18) !important;
+}
+
+.project-tag,
+.status-pill {
+    background: #e0f3fa !important;
+    color: #01232d !important;
+    border-color: #9bcbdc !important;
+}
+
+.stButton > button,
+.stDownloadButton > button,
+.stLinkButton > a {
+    background: #01232d !important;
+    color: #ffffff !important;
+    border-color: #01232d !important;
+}
+
+.stButton > button p,
+.stDownloadButton > button p,
+.stLinkButton > a p {
+    color: #ffffff !important;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+.stLinkButton > a:hover {
+    background: #07536b !important;
+    color: #ffffff !important;
+    border-color: #07536b !important;
+}
+
+.stButton > button:hover p,
+.stDownloadButton > button:hover p,
+.stLinkButton > a:hover p {
+    color: #ffffff !important;
+}
+
+[data-testid="stSelectbox"] label,
+[data-testid="stMultiSelect"] label,
+[data-testid="stTextInput"] label,
+[data-testid="stTextArea"] label {
+    color: #01232d !important;
+}
+
+div[data-baseweb="select"] > div,
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea {
+    background: #f8fdff !important;
+    color: #01232d !important;
+    border-color: #7daebe !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #526f79 !important;
+}
+
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"]:hover summary {
+    color: #01232d !important;
+}
+
+/* Uniform full-width navigation, not label-width rectangles. */
+section[data-testid="stSidebar"] [data-testid="stRadio"],
+section[data-testid="stSidebar"] div[role="radiogroup"] {
+    width: 100% !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] > div {
+    width: 100% !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label {
+    display: flex !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 44px;
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #01232d !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label p {
+    color: #01232d !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    background: rgba(255,255,255,0.32) !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked),
+section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {
+    background: #01232d !important;
+    color: #ffffff !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) p,
+section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] p {
+    color: #ffffff !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label::before,
+section[data-testid="stSidebar"] div[role="radiogroup"] label::after {
+    display: none !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:focus-within {
+    outline: 2px solid #01232d;
+    outline-offset: 2px;
+}
+
+@keyframes shore-foam {
+    from { transform: translate3d(-12px, 0, 0); opacity: 0.8; }
+    to { transform: translate3d(12px, -4px, 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-testid="stAppViewContainer"]::before {
+        animation: none !important;
+    }
+}
+</style>
+"""
+
+shore_css = shore_css.replace(
+    "HORIZON_VALUE", str(shore_horizons.get(selected_page, 34))
+)
+st.markdown(shore_css, unsafe_allow_html=True)
+
+
+# LinkedOut Coastal Content Refinement v4
+
+coastal_content_css = """
+<style>
+/* Hero: the primary white editorial surface. */
+.hero {
+    position: relative !important;
+    overflow: hidden !important;
+    padding: clamp(2rem, 4vw, 3.4rem) !important;
+    border-radius: 24px !important;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.97) 0%,
+            rgba(244,252,255,0.93) 62%,
+            rgba(226,246,252,0.90) 100%
+        ) !important;
+    border: 1px solid rgba(255,255,255,0.92) !important;
+    box-shadow:
+        0 20px 50px rgba(1,35,45,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.92) !important;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    right: -8%;
+    bottom: -44%;
+    width: min(34rem, 55vw);
+    height: min(34rem, 55vw);
+    border-radius: 50%;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle,
+            rgba(32,180,226,0.20) 0%,
+            rgba(32,180,226,0.08) 36%,
+            transparent 68%
+        );
+}
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    max-width: 11ch;
+    font-size: clamp(2.55rem, 5.3vw, 4.65rem) !important;
+    line-height: 0.98 !important;
+    font-weight: 830 !important;
+    color: #01232d !important;
+    letter-spacing: -0.06em !important;
+}
+
+.hero p {
+    max-width: 47rem !important;
+    margin-top: 1.25rem !important;
+    color: #234957 !important;
+    font-size: clamp(1rem, 1.25vw, 1.14rem) !important;
+    line-height: 1.72 !important;
+}
+
+.hero .eyebrow {
+    color: #006a94 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.16em !important;
+}
+
+/* Stronger editorial hierarchy. */
+.page-heading {
+    max-width: 58rem !important;
+    color: #01232d !important;
+    font-size: clamp(2.2rem, 4vw, 3.75rem) !important;
+    font-weight: 830 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.055em !important;
+}
+
+.page-intro {
+    max-width: 45rem !important;
+    color: #234957 !important;
+    font-size: clamp(1rem, 1.25vw, 1.12rem) !important;
+    line-height: 1.72 !important;
+    margin-bottom: 2.35rem !important;
+}
+
+h2 {
+    color: #01232d !important;
+    font-size: clamp(1.6rem, 2.4vw, 2.15rem) !important;
+    font-weight: 790 !important;
+    letter-spacing: -0.04em !important;
+    margin-top: 3rem !important;
+    margin-bottom: 1rem !important;
+}
+
+h3 {
+    color: #01232d !important;
+    font-weight: 760 !important;
+    letter-spacing: -0.025em !important;
+}
+
+/* Cards: bright and consistent, with restrained depth. */
+.metric-card,
+.section-card,
+.project-card {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.96),
+            rgba(241,251,255,0.91)
+        ) !important;
+    border: 1px solid rgba(255,255,255,0.93) !important;
+    box-shadow:
+        0 10px 26px rgba(1,35,45,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.92) !important;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease !important;
+}
+
+.metric-card::before,
+.section-card::before,
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1.3rem;
+    right: 1.3rem;
+    height: 3px;
+    border-radius: 0 0 999px 999px;
+    background: linear-gradient(
+        90deg,
+        #0a88c5,
+        #54c9ea,
+        #0a88c5
+    );
+    opacity: 0.78;
+}
+
+.metric-card:hover,
+.section-card:hover,
+.project-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(70,178,215,0.65) !important;
+    box-shadow:
+        0 18px 36px rgba(1,35,45,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.96) !important;
+}
+
+.metric-card {
+    min-height: 9.25rem !important;
+    padding: 1.55rem !important;
+}
+
+.metric-value {
+    color: #01232d !important;
+    font-size: clamp(2rem, 3vw, 2.8rem) !important;
+    font-weight: 820 !important;
+    letter-spacing: -0.05em !important;
+}
+
+.metric-label {
+    color: #3d6675 !important;
+    font-size: 0.85rem !important;
+    font-weight: 650 !important;
+    line-height: 1.45 !important;
+}
+
+.section-card {
+    min-height: 9.5rem !important;
+    padding: 1.6rem !important;
+}
+
+.section-card h3,
+.project-card h3 {
+    color: #01232d !important;
+}
+
+.section-card p,
+.project-card p {
+    color: #365d6c !important;
+}
+
+.project-card {
+    min-height: 16rem !important;
+    padding: 1.65rem !important;
+}
+
+.project-card .eyebrow {
+    color: #006a94 !important;
+}
+
+/* Pills, tags, and workflow surfaces. */
+.status-pill {
+    background: #dff5fb !important;
+    border-color: #a4d9e8 !important;
+    color: #01232d !important;
+    font-weight: 750 !important;
+}
+
+.project-tag {
+    background: #edf9fc !important;
+    border-color: #b4dfe9 !important;
+    color: #164a5b !important;
+    font-weight: 650 !important;
+}
+
+.workflow-box {
+    border-radius: 14px !important;
+    background: rgba(248,253,255,0.93) !important;
+    border: 1px solid rgba(255,255,255,0.9) !important;
+    color: #234957 !important;
+    box-shadow: 0 8px 18px rgba(1,35,45,0.09) !important;
+}
+
+.workflow-box::before {
+    display: block !important;
+    background: linear-gradient(#1ca5d7, #07536b) !important;
+}
+
+.workflow-arrow {
+    color: #07536b !important;
+    font-weight: 800 !important;
+}
+
+/* Streamlit expander surfaces. */
+[data-testid="stExpander"] {
+    background: rgba(249,254,255,0.94) !important;
+    border: 1px solid rgba(255,255,255,0.92) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 20px rgba(1,35,45,0.09) !important;
+    overflow: hidden !important;
+}
+
+[data-testid="stExpander"]:hover {
+    border-color: rgba(70,178,215,0.65) !important;
+}
+
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] {
+    color: #01232d !important;
+    font-weight: 720 !important;
+}
+
+[data-testid="stExpanderDetails"] {
+    border-top: 1px solid rgba(7,83,107,0.12) !important;
+}
+
+/* Controls and forms. */
+.stButton > button,
+.stDownloadButton > button,
+.stLinkButton > a {
+    min-height: 2.85rem !important;
+    border-radius: 10px !important;
+    background: #01232d !important;
+    border: 1px solid #01232d !important;
+    color: #ffffff !important;
+    font-weight: 720 !important;
+    letter-spacing: -0.01em !important;
+    box-shadow: 0 5px 12px rgba(1,35,45,0.14) !important;
+    transition:
+        transform 160ms ease,
+        background 160ms ease,
+        box-shadow 160ms ease !important;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+.stLinkButton > a:hover {
+    transform: translateY(-2px) !important;
+    background: #07536b !important;
+    border-color: #07536b !important;
+    box-shadow: 0 9px 18px rgba(1,35,45,0.18) !important;
+}
+
+.stButton > button p,
+.stDownloadButton > button p,
+.stLinkButton > a p,
+.stButton > button:hover p,
+.stDownloadButton > button:hover p,
+.stLinkButton > a:hover p {
+    color: #ffffff !important;
+}
+
+[data-testid="stSelectbox"] label,
+[data-testid="stMultiSelect"] label,
+[data-testid="stTextInput"] label,
+[data-testid="stTextArea"] label {
+    color: #01232d !important;
+    font-weight: 720 !important;
+}
+
+div[data-baseweb="select"] > div,
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea {
+    border-radius: 10px !important;
+    background: rgba(249,254,255,0.94) !important;
+    border-color: #99cada !important;
+    color: #01232d !important;
+    box-shadow: 0 3px 10px rgba(1,35,45,0.06) !important;
+}
+
+[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover,
+[data-testid="stTextInput"] input:hover,
+[data-testid="stTextArea"] textarea:hover {
+    border-color: #3aa6cb !important;
+}
+
+[data-testid="stSelectbox"] [data-baseweb="select"] > div:focus-within,
+[data-testid="stTextInput"] input:focus,
+[data-testid="stTextArea"] textarea:focus {
+    border-color: #006a94 !important;
+    box-shadow: 0 0 0 3px rgba(84,201,234,0.25) !important;
+}
+
+/* More breathable desktop and mobile rhythm. */
+.block-container {
+    padding-bottom: max(8rem, 14vh) !important;
+}
+
+@media (max-width: 767px) {
+    .hero {
+        padding: 1.65rem !important;
+        border-radius: 18px !important;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.35rem, 12vw, 3.15rem) !important;
+    }
+
+    .hero::before {
+        width: 17rem;
+        height: 17rem;
+        right: -42%;
+        bottom: -58%;
+    }
+
+    .page-heading {
+        font-size: clamp(2rem, 10vw, 2.85rem) !important;
+    }
+
+    .metric-card,
+    .section-card,
+    .project-card {
+        min-height: auto !important;
+        padding: 1.3rem !important;
+    }
+
+    .metric-card::before,
+    .section-card::before,
+    .project-card::before {
+        left: 1rem;
+        right: 1rem;
+    }
+
+    h2 {
+        margin-top: 2.3rem !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .metric-card,
+    .section-card,
+    .project-card,
+    .stButton > button,
+    .stDownloadButton > button,
+    .stLinkButton > a {
+        transition: none !important;
+    }
+
+    .metric-card:hover,
+    .section-card:hover,
+    .project-card:hover,
+    .stButton > button:hover,
+    .stDownloadButton > button:hover,
+    .stLinkButton > a:hover {
+        transform: none !important;
+    }
+}
+</style>
+"""
+
+st.markdown(coastal_content_css, unsafe_allow_html=True)
+
+
+# LinkedOut Coastal Responsive Polish v5
+
+coastal_responsive_css = """
+<style>
+/* Keep content comfortably contained across viewports. */
+.block-container {
+    width: min(100%, 1280px) !important;
+    margin-inline: auto !important;
+}
+
+/* Clear focus states for keyboard navigation. */
+*:focus-visible {
+    outline: 3px solid #07536b !important;
+    outline-offset: 3px !important;
+}
+
+.stButton > button:focus-visible,
+.stDownloadButton > button:focus-visible,
+.stLinkButton > a:focus-visible,
+section[data-testid="stSidebar"] div[role="radiogroup"] label:focus-within {
+    outline: 3px solid #ffffff !important;
+    outline-offset: 3px !important;
+}
+
+/* Touch targets remain comfortably tappable. */
+.stButton > button,
+.stDownloadButton > button,
+.stLinkButton > a,
+section[data-testid="stSidebar"] div[role="radiogroup"] label {
+    min-height: 44px !important;
+}
+
+/* Prevent long content from spilling outside cards or controls. */
+.hero,
+.metric-card,
+.section-card,
+.project-card,
+.workflow-box,
+[data-testid="stExpander"],
+.empty-state,
+.page-intro,
+.metric-label,
+.project-card p,
+.section-card p {
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+}
+
+/* Prevent filters and inputs from exceeding narrow containers. */
+[data-testid="stSelectbox"],
+[data-testid="stMultiSelect"],
+[data-testid="stTextInput"],
+[data-testid="stTextArea"],
+div[data-baseweb="select"],
+div[data-baseweb="select"] > div {
+    min-width: 0 !important;
+}
+
+/* Keep scrollbars subtle and consistent with the coastal palette. */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(1,35,45,0.42) rgba(255,255,255,0.18);
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.14);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(1,35,45,0.42);
+    border: 2px solid rgba(255,255,255,0.14);
+    border-radius: 999px;
+}
+
+/* Tablet. */
+@media (max-width: 1024px) {
+    .block-container {
+        padding-left: clamp(1.25rem, 3vw, 2rem) !important;
+        padding-right: clamp(1.25rem, 3vw, 2rem) !important;
+    }
+
+    .page-intro {
+        max-width: 42rem !important;
+    }
+
+    .metric-card {
+        min-height: 8.25rem !important;
+    }
+
+    .project-card {
+        min-height: 14rem !important;
+    }
+
+    section[data-testid="stSidebar"] div[role="radiogroup"] label {
+        padding-left: 0.85rem !important;
+        padding-right: 0.85rem !important;
+    }
+}
+
+/* Mobile. */
+@media (max-width: 767px) {
+    .block-container {
+        padding:
+            1.2rem
+            max(1rem, env(safe-area-inset-right))
+            max(7rem, calc(6rem + env(safe-area-inset-bottom)))
+            max(1rem, env(safe-area-inset-left)) !important;
+    }
+
+    .page-heading {
+        margin-top: 0.2rem !important;
+    }
+
+    .page-intro {
+        margin-bottom: 1.55rem !important;
+    }
+
+    .eyebrow {
+        letter-spacing: 0.13em !important;
+        font-size: 0.68rem !important;
+    }
+
+    .metric-card,
+    .section-card,
+    .project-card,
+    .workflow-box,
+    [data-testid="stExpander"] {
+        border-radius: 14px !important;
+    }
+
+    .metric-card,
+    .section-card,
+    .project-card {
+        width: 100% !important;
+    }
+
+    .metric-label {
+        font-size: 0.82rem !important;
+    }
+
+    .project-tags {
+        gap: 0.35rem !important;
+    }
+
+    .project-tag {
+        max-width: 100%;
+        overflow-wrap: anywhere !important;
+    }
+
+    .stButton > button,
+    .stDownloadButton > button,
+    .stLinkButton > a {
+        min-height: 46px !important;
+        font-size: 0.94rem !important;
+    }
+
+    section[data-testid="stSidebar"] div[role="radiogroup"] label {
+        min-height: 46px !important;
+        padding: 0.78rem 0.9rem !important;
+    }
+
+    [data-testid="stExpander"] summary {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Foam and sand remain visible without claiming too much phone space. */
+    [data-testid="stAppViewContainer"]::before {
+        bottom: 4.7vh !important;
+        height: 2.6vh !important;
+        min-height: 14px !important;
+        opacity: 0.88 !important;
+    }
+
+    [data-testid="stAppViewContainer"]::after {
+        height: 5vh !important;
+    }
+}
+
+/* Small phones, including 375 px width. */
+@media (max-width: 400px) {
+    .block-container {
+        padding-left: 0.82rem !important;
+        padding-right: 0.82rem !important;
+    }
+
+    .hero,
+    .metric-card,
+    .section-card,
+    .project-card {
+        padding-left: 1.05rem !important;
+        padding-right: 1.05rem !important;
+    }
+
+    .hero h1 {
+        letter-spacing: -0.065em !important;
+    }
+
+    .page-heading {
+        letter-spacing: -0.06em !important;
+    }
+
+    .project-tag {
+        font-size: 0.68rem !important;
+        padding: 0.2rem 0.48rem !important;
+    }
+}
+
+/* Large screens remain readable rather than excessively wide. */
+@media (min-width: 1440px) {
+    .block-container {
+        max-width: 1320px !important;
+    }
+
+    .hero p {
+        max-width: 49rem !important;
+    }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+</style>
+"""
+
+st.markdown(coastal_responsive_css, unsafe_allow_html=True)
+
 PAGES[selected_page]()
 st.markdown("</div>", unsafe_allow_html=True)
