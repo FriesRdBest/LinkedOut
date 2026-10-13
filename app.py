@@ -1107,7 +1107,7 @@ def signal_page():
     st.markdown(
         f"""
         <div class="hero">
-          <div class="eyebrow">Proof of work career application</div>
+          <div class="eyebrow">Robin Sylvester's Proof of work career application</div>
           <h1>Linked<span class="hero-brand-out">Out</span></h1>
           <p>
             A working alternative to a conventional professional profile.
