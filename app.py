@@ -624,7 +624,7 @@ def ledger_page():
 
     st.write("")
     if applications:
-        ledger_frame = pandas.DataFrame(applications)
+        ledger_frame = pd.DataFrame(applications)
         export_buffer = io.StringIO()
         ledger_frame.to_csv(export_buffer, index=False)
         st.download_button(
