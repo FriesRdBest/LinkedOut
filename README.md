@@ -18,7 +18,7 @@ LinkedOut is a working alternative to a conventional professional profile. Inste
 
 ## Live application
 
-Live URL: coming soon after Streamlit Community Cloud deployment.
+Live URL: https://linked-out.streamlit.app/
 
 ## Contact
 
