@@ -948,8 +948,7 @@ def contact_page():
 
     with right:
         st.markdown("### Direct contact")
-        st.markdown("For a direct conversation, email me at sylvester.career@gmail.com.")
-        st.link_button("Email sylvester.career@gmail.com", "mailto:sylvester.career@gmail.com")
+        st.link_button("Email me", "mailto:sylvester.career@gmail.com")
 
         st.markdown("### Response expectations")
         st.markdown("I aim to respond within 1-2 business days. For time sensitive opportunities, mention the timeline in your message.")
