@@ -1,37 +1,34 @@
-from pathlib import Path
-from typing import Any
-
 import yaml
-
-DATA_DIRECTORY = Path(__file__).resolve().parents[1] / "data"
-
-
-def load_yaml(filename: str) -> dict[str, Any]:
-    path = DATA_DIRECTORY / filename
-    if not path.exists():
-        raise FileNotFoundError(f"Required data file is missing: {path}")
-    with path.open("r", encoding="utf-8") as file:
-        data = yaml.safe_load(file) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"Expected a mapping in {path}")
-    return data
+import streamlit as st
 
 
-def load_profile() -> dict[str, Any]:
-    return load_yaml("profile.yaml")
+def _load_yaml(path):
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            return yaml.safe_load(file) or []
+    except FileNotFoundError:
+        st.error(f"Required data file not found: {path}")
+        return []
+    except yaml.YAMLError as error:
+        st.error(f"Invalid YAML in {path}: {error}")
+        return []
 
 
-def load_projects() -> list[dict[str, Any]]:
-    return load_yaml("projects.yaml").get("projects", [])
+def load_profile():
+    return _load_yaml("data/profile.yaml") or {}
 
 
-def load_applications() -> list[dict[str, Any]]:
-    return load_yaml("applications.yaml").get("applications", [])
+def load_projects():
+    return _load_yaml("data/projects.yaml") or []
 
 
-def load_capabilities() -> list[dict[str, Any]]:
-    return load_yaml("capabilities.yaml").get("capabilities", [])
+def load_applications():
+    return _load_yaml("data/applications.yaml") or []
 
 
-def load_decisions() -> list[dict[str, Any]]:
-    return load_yaml("decisions.yaml").get("decisions", [])
+def load_capabilities():
+    return _load_yaml("data/capabilities.yaml") or []
+
+
+def load_decisions():
+    return _load_yaml("data/decisions.yaml") or []
