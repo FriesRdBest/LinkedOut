@@ -3267,3 +3267,70 @@ st.markdown(final_brand_actions_css, unsafe_allow_html=True)
 
 PAGES[selected_page]()
 st.markdown("</div>", unsafe_allow_html=True)
+
+
+# LinkedOut Native Navigation Visibility v11
+st.markdown(
+    """
+    <style>
+    /* Keep the native header and toolbar available for navigation. */
+    .stApp > header,
+    header[data-testid="stHeader"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        color: #01232d !important;
+    }
+
+    [data-testid="stToolbar"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #01232d !important;
+    }
+
+    /* Make the collapsed-sidebar control visible and tappable. */
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        color: #01232d !important;
+        background: rgba(248,253,255,0.96) !important;
+        border-radius: 10px !important;
+    }
+
+    [data-testid="stSidebarCollapsedControl"] button,
+    [data-testid="collapsedControl"] button,
+    [data-testid="stSidebarCollapseButton"] button,
+    header[data-testid="stHeader"] button {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        color: #01232d !important;
+        background: rgba(248,253,255,0.96) !important;
+        border-radius: 10px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    header[data-testid="stHeader"] svg,
+    [data-testid="stSidebarCollapsedControl"] svg,
+    [data-testid="collapsedControl"] svg {
+        color: #01232d !important;
+        fill: currentColor !important;
+    }
+
+    @media (max-width: 767px) {
+        .block-container {
+            padding-top: 3.8rem !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
