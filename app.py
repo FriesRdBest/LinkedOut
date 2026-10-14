@@ -3514,3 +3514,36 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+
+# LinkedOut Expanded Header Contrast v14
+st.markdown(
+    """
+    <style>
+    /* Open expanders only: black title bar, white title and arrow.
+       Leave collapsed headers and expanded content unchanged. */
+    .stApp [data-testid="stExpander"] details[open] > summary,
+    .stApp details[data-testid="stExpander"][open] > summary,
+    .stApp [data-testid="stExpander"] summary[aria-expanded="true"] {
+        background: #000000 !important;
+        color: #ffffff !important;
+    }
+
+    /* Override existing dark text rules within the open title bar. */
+    .stApp [data-testid="stExpander"] details[open] > summary *,
+    .stApp details[data-testid="stExpander"][open] > summary *,
+    .stApp [data-testid="stExpander"] summary[aria-expanded="true"] * {
+        color: #ffffff !important;
+    }
+
+    /* Keep SVG arrows readable alongside the white title. */
+    .stApp [data-testid="stExpander"] details[open] > summary svg,
+    .stApp details[data-testid="stExpander"][open] > summary svg,
+    .stApp [data-testid="stExpander"] summary[aria-expanded="true"] svg {
+        color: #ffffff !important;
+        fill: currentColor !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
