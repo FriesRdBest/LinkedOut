@@ -36,17 +36,13 @@ st.markdown(
       /* Visual Elevation Reset — Phase 1
          Only: active sidebar block + remove Streamlit top chrome. */
 
-      header[data-testid="stHeader"] {{
-        display: none;
-      }}
+      
 
       [data-testid="stToolbar"] {{
         display: none;
       }}
 
-      .stApp > header {{
-        display: none;
-      }}
+      
 
       .block-container {{
         padding-top: 2.5rem;
@@ -2134,8 +2130,7 @@ shore_css = """
 }
 
 /* Keep actual application content above the decorative shore. */
-section[data-testid="stMain"],
-section[data-testid="stSidebar"] {
+section[data-testid="stMain"] {
     position: relative;
     z-index: 1;
 }
@@ -2151,7 +2146,6 @@ section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
     border-right: 0 !important;
 }
 
-header[data-testid="stHeader"],
 [data-testid="stToolbar"] {
     display: none !important;
 }
@@ -3273,60 +3267,3 @@ st.markdown(final_brand_actions_css, unsafe_allow_html=True)
 
 PAGES[selected_page]()
 st.markdown("</div>", unsafe_allow_html=True)
-
-
-# LinkedOut Sidebar Reopen Fix v10
-st.markdown(
-    """
-    <style>
-    /* Restore the native header that contains the sidebar reopen control. */
-    .stApp > header,
-    header[data-testid="stHeader"] {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        background: transparent !important;
-        z-index: 999990 !important;
-    }
-
-    /* Keep the unrelated Streamlit toolbar hidden. */
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
-
-    /* Support sidebar control selectors used across Streamlit versions. */
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapseButton"] {
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-
-    [data-testid="stSidebarCollapsedControl"] button,
-    [data-testid="collapsedControl"] button,
-    [data-testid="stSidebarCollapseButton"] button,
-    header[data-testid="stHeader"] button {
-        min-width: 44px !important;
-        min-height: 44px !important;
-        color: #01232d !important;
-        background: rgba(248,253,255,0.96) !important;
-        border-radius: 10px !important;
-        pointer-events: auto !important;
-    }
-
-    header[data-testid="stHeader"] button:focus-visible {
-        outline: 3px solid #07536b !important;
-        outline-offset: 2px !important;
-    }
-
-    /* Leave room for the reopen button above the mobile content. */
-    @media (max-width: 767px) {
-        .block-container {
-            padding-top: 3.8rem !important;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
