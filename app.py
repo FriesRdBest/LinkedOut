@@ -3394,3 +3394,123 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+
+# LinkedOut Unified Sidebar Labels v13
+st.markdown(
+    """
+    <style>
+    /* Prevent the collapsed-control wrapper from showing a white block. */
+    .stApp [data-testid="stSidebarCollapsedControl"],
+    .stApp [data-testid="collapsedControl"] {
+        background: #000000 !important;
+        color: #54c9ea !important;
+        border-radius: 10px !important;
+    }
+
+    /* Include both wrapper-based and directly-rendered native buttons. */
+    .stApp :is(
+        button[data-testid="stExpandSidebarButton"],
+        button[data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] button,
+        [data-testid="collapsedControl"] button,
+        [data-testid="stSidebarCollapseButton"] button,
+        button[data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebarHeader"] button,
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Collapse sidebar"]
+    ) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: auto !important;
+        min-width: 100px !important;
+        min-height: 44px !important;
+        padding: 0.55rem 0.85rem !important;
+        background: #000000 !important;
+        color: #54c9ea !important;
+        border: 1px solid #54c9ea !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        font-size: 0.95rem !important;
+        font-weight: 750 !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+    }
+
+    /* Replace the visual icon, not the native button or its click handler. */
+    .stApp :is(
+        button[data-testid="stExpandSidebarButton"],
+        button[data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] button,
+        [data-testid="collapsedControl"] button,
+        [data-testid="stSidebarCollapseButton"] button,
+        button[data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebarHeader"] button,
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Collapse sidebar"]
+    ) > * {
+        display: none !important;
+    }
+
+    .stApp :is(
+        button[data-testid="stExpandSidebarButton"],
+        button[data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] button,
+        [data-testid="collapsedControl"] button,
+        button[aria-label="Expand sidebar"]
+    )::before {
+        content: "Tabs >>" !important;
+        display: inline-block !important;
+        color: #54c9ea !important;
+        pointer-events: none;
+    }
+
+    .stApp :is(
+        [data-testid="stSidebarCollapseButton"] button,
+        button[data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebarHeader"] button,
+        button[aria-label="Collapse sidebar"]
+    )::before {
+        content: "Hide <<" !important;
+        display: inline-block !important;
+        color: #54c9ea !important;
+        pointer-events: none;
+    }
+
+    .stApp :is(
+        button[data-testid="stExpandSidebarButton"],
+        button[data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] button,
+        [data-testid="collapsedControl"] button,
+        [data-testid="stSidebarCollapseButton"] button,
+        button[data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebarHeader"] button,
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Collapse sidebar"]
+    ):hover {
+        background: #01232d !important;
+        color: #54c9ea !important;
+    }
+
+    .stApp :is(
+        button[data-testid="stExpandSidebarButton"],
+        button[data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] button,
+        [data-testid="collapsedControl"] button,
+        [data-testid="stSidebarCollapseButton"] button,
+        button[data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebarHeader"] button,
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Collapse sidebar"]
+    ):focus-visible {
+        outline: 2px solid #54c9ea !important;
+        outline-offset: 3px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
