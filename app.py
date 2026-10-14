@@ -3334,3 +3334,63 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+
+# LinkedOut Sidebar Control Colors v12
+st.markdown(
+    """
+    <style>
+    /* Change only the sidebar expand/collapse controls. */
+    .stApp [data-testid="stSidebarCollapsedControl"],
+    .stApp [data-testid="collapsedControl"],
+    .stApp [data-testid="stSidebarCollapsedControl"] button,
+    .stApp [data-testid="collapsedControl"] button,
+    .stApp [data-testid="stSidebarCollapseButton"] button,
+    .stApp button[aria-label="Expand sidebar"],
+    .stApp button[aria-label="Collapse sidebar"] {
+        background: #000000 !important;
+        color: #54c9ea !important;
+        border: 1px solid #54c9ea !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+    }
+
+    .stApp [data-testid="stSidebarCollapsedControl"] svg,
+    .stApp [data-testid="collapsedControl"] svg,
+    .stApp [data-testid="stSidebarCollapseButton"] button svg,
+    .stApp button[aria-label="Expand sidebar"] svg,
+    .stApp button[aria-label="Collapse sidebar"] svg {
+        color: #54c9ea !important;
+        fill: currentColor !important;
+    }
+
+    /* Cover Streamlit versions that render icons as text spans. */
+    .stApp [data-testid="stSidebarCollapsedControl"] button span,
+    .stApp [data-testid="collapsedControl"] button span,
+    .stApp [data-testid="stSidebarCollapseButton"] button span,
+    .stApp button[aria-label="Expand sidebar"] span,
+    .stApp button[aria-label="Collapse sidebar"] span {
+        color: #54c9ea !important;
+    }
+
+    .stApp [data-testid="stSidebarCollapsedControl"] button:hover,
+    .stApp [data-testid="collapsedControl"] button:hover,
+    .stApp [data-testid="stSidebarCollapseButton"] button:hover,
+    .stApp button[aria-label="Expand sidebar"]:hover,
+    .stApp button[aria-label="Collapse sidebar"]:hover {
+        background: #01232d !important;
+        color: #54c9ea !important;
+    }
+
+    .stApp [data-testid="stSidebarCollapsedControl"] button:focus-visible,
+    .stApp [data-testid="collapsedControl"] button:focus-visible,
+    .stApp [data-testid="stSidebarCollapseButton"] button:focus-visible,
+    .stApp button[aria-label="Expand sidebar"]:focus-visible,
+    .stApp button[aria-label="Collapse sidebar"]:focus-visible {
+        outline: 2px solid #54c9ea !important;
+        outline-offset: 3px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
